@@ -117,31 +117,6 @@ export function createThemePark(
       _themeToLoad = targetTheme
       _themeState = ThemeStates.loading
 
-      if (testThemes) {
-        return new Promise((resolve, reject) => {
-          import('src/mett/theming/__tests__/themes/_initializers/' +
-            targetTheme).then(
-            function(result) {
-              if (targetTheme === _themeToLoad) {
-                _theme = result.default
-                initTheme()
-                resolve()
-              }
-            },
-            function(error) {
-              if (targetTheme === _themeToLoad) {
-                _theme = new Theme()
-                _components = null
-                _themeName = ''
-                _themeState = ThemeStates.error
-
-                reject(error)
-              }
-            }
-          )
-        })
-      }
-
       return new Promise((resolve, reject) => {
         import('src/themes/_initializers/' + targetTheme).then(
           function(result) {

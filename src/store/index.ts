@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { mediaLibrary } from './media-library/media-library'
+import { dialog } from './dialog/dialog'
 
 Vue.use(Vuex)
 
@@ -29,7 +30,8 @@ export default function(/* { ssrContext } */) {
       }
     },
     modules: {
-      mediaLibrary: mediaLibrary()
+      mediaLibrary: mediaLibrary(),
+      dialog: dialog()
     },
 
     // enable strict mode (adds overhead!)

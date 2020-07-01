@@ -14,12 +14,9 @@ export default function({
 }) {
   const originalBeforeCreate = app.beforeCreate
   const themePark = createThemePark(app, store, router)
-
   app.$themePark = themePark
-
   app.beforeCreate = function(...args: []) {
     if (originalBeforeCreate) originalBeforeCreate.apply(this, args)
-
     this.$themePark = themePark
   }
 }
