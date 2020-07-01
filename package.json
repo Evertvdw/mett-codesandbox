@@ -11,13 +11,16 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@quasar/app": "^2.0.0",
     "@quasar/extras": "^1.8.2",
     "core-js": "^3.6.5",
-    "quasar": "^1.12.7"
+    "quasar": "^1.12.7",
+    "uuid": "8.2.0",
+    "vue-class-component": "^7.1.0",
+    "vue-i18n": "8.18.2",
+    "vue-property-decorator": "9.0.0"
   },
-  "devDependencies": {
-    "@quasar/app": "^2.0.0"
-  },
+  "devDependencies": {},
   "browserslist": [
     "last 10 Chrome versions",
     "last 10 Firefox versions",
