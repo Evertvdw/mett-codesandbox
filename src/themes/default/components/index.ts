@@ -1,5 +1,5 @@
-import MediaLibrary from './media-library'
+import Static from './static'
 
 export default {
-  MediaLibrary
+  Static
 }
