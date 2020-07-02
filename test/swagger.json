@@ -1,0 +1,2639 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "Mett API",
+		"version": "v1"
+	},
+	"paths": {
+		"/api/AntiForgery": {
+			"get": {
+				"tags": ["AntiForgery"],
+				"summary": "Set anti forgery cookie",
+				"description": "Requires no privileges",
+				"operationId": "GetAntiForgery",
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/Cache": {
+			"get": {
+				"tags": ["Cache"],
+				"summary": "Get the cache",
+				"description": "Requires no privileges",
+				"operationId": "GetCache",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Downloads": {
+			"get": {
+				"tags": ["Downloads"],
+				"summary": "Get downloads",
+				"description": "Requires view:file privileges",
+				"operationId": "GetDownloads",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "contentDisposition",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"default": "inline",
+							"nullable": true
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/FileContainers": {
+			"get": {
+				"tags": ["FileContainers"],
+				"summary": "Get the file container",
+				"description": "Requires view privileges",
+				"operationId": "GetFileContainers",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileContainerDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileContainerDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileContainerDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Files": {
+			"get": {
+				"tags": ["Files"],
+				"summary": "Get the files",
+				"description": "Requires view privileges",
+				"operationId": "GetFiles",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/FileDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Files/{uid}": {
+			"get": {
+				"tags": ["Files"],
+				"summary": "Get a file by guid",
+				"description": "Requires view privileges",
+				"operationId": "GetFileByGuid",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/FileDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FileDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/FileDto"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Files"],
+				"summary": "Delete a file by guid",
+				"description": "Requires delete privileges",
+				"operationId": "DeleteFileByGuid",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Hosts": {
+			"get": {
+				"tags": ["Hosts"],
+				"summary": "Get the current host",
+				"description": "Requires public privileges",
+				"operationId": "GetHost",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["Hosts"],
+				"summary": "Add new host",
+				"description": "Requires add privileges",
+				"operationId": "AddHost",
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddHostRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddHostRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddHostRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddHostRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddHostResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Hosts/{name}": {
+			"get": {
+				"tags": ["Hosts"],
+				"summary": "Get host by name",
+				"description": "Requires view privileges",
+				"operationId": "GetHostByName",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"nullable": true
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HostDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Hosts/{id}": {
+			"put": {
+				"tags": ["Hosts"],
+				"summary": "Update existing host by id",
+				"description": "Requires update privileges",
+				"operationId": "UpdateHostById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateHostRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateHostRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateHostRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateHostRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateHostResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Installation": {
+			"get": {
+				"tags": ["Installation"],
+				"summary": "Install a new site",
+				"description": "Requires installation privileges",
+				"operationId": "AddInstallation",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/AddInstallationResponse"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddInstallationResponse"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddInstallationResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Items": {
+			"get": {
+				"tags": ["Items"],
+				"summary": "Get items",
+				"description": "Requires view privileges",
+				"operationId": "GetItems",
+				"parameters": [
+					{
+						"name": "FilterPageGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "FilterContainerGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "Skip",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "Take",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "SortOnColumn",
+						"in": "query",
+						"schema": {
+							"$ref": "#/components/schemas/SortOnColumnDto"
+						}
+					},
+					{
+						"name": "SortByAction",
+						"in": "query",
+						"schema": {
+							"$ref": "#/components/schemas/SortByActionDto"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["Items"],
+				"summary": "Add items",
+				"description": "Requires add privileges",
+				"operationId": "AddItems",
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddItemsRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddItemsRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddItemsRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/AddItemsRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/AddItemsResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": ["Items"],
+				"summary": "Update items",
+				"description": "Requires update privileges",
+				"operationId": "UpdateItems",
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateItemsRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateItemsRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateItemsRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateItemsRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateItemsResponse"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Items"],
+				"summary": "Delete items",
+				"description": "Requires delete privileges",
+				"operationId": "DeleteItems",
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteItemRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteItemRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteItemRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/DeleteItemRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Login/{getLoginRequest}": {
+			"post": {
+				"tags": ["Login"],
+				"summary": "Login",
+				"description": "Login route",
+				"operationId": "PostLogin",
+				"parameters": [
+					{
+						"name": "getLoginRequest",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetAuth0LoginRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetAuth0LoginRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetAuth0LoginRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetAuth0LoginRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Login": {
+			"get": {
+				"tags": ["Login"],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/LoginDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Logout": {
+			"get": {
+				"tags": ["Logout"],
+				"summary": "Logout",
+				"description": "Requires no privileges",
+				"operationId": "Logout",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/MenuItems/{getMenuItemRequest}": {
+			"get": {
+				"tags": ["Menus"],
+				"summary": "Get menu for url segment",
+				"description": "Requires view privileges",
+				"operationId": "GetMenus",
+				"parameters": [
+					{
+						"name": "FilterUrlSegment",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"nullable": true
+						}
+					},
+					{
+						"name": "FilterMenuId",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32",
+							"nullable": true
+						}
+					},
+					{
+						"name": "IncludeRelatedMenuItems",
+						"in": "query",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"name": "getMenuItemRequest",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuItemDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuItemDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuItemDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Menus": {
+			"get": {
+				"tags": ["Menus"],
+				"summary": "Get available menus",
+				"description": "Requires view privileges",
+				"operationId": "GetMenus",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/MenuDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Pages": {
+			"get": {
+				"tags": ["Pages"],
+				"summary": "Get pages",
+				"description": "Requires public privileges",
+				"operationId": "GetPages",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MenuItemDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MenuItemDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/MenuItemDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Pages/{getPageRequest}": {
+			"get": {
+				"tags": ["Pages"],
+				"summary": "Get page by query",
+				"description": "Requires public privileges",
+				"operationId": "GetPagesByQuery",
+				"parameters": [
+					{
+						"name": "FilterPageGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "FilterContainerGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid",
+							"nullable": true
+						}
+					},
+					{
+						"name": "LoadComments",
+						"in": "query",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"name": "getPageRequest",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/PageDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PageDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PageDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Ping": {
+			"get": {
+				"tags": ["Ping"],
+				"summary": "Get ping",
+				"description": "Requires no privileges",
+				"operationId": "GetPing",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/GetPingResponse"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetPingResponse"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetPingResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/RelatedItems": {
+			"get": {
+				"tags": ["RelatedItems"],
+				"summary": "Get items related to an item",
+				"description": "Requires view privileges",
+				"operationId": "GetRelatedItems",
+				"parameters": [
+					{
+						"name": "FilterPageGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "FilterContainerGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "FilterItemGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid",
+							"nullable": true
+						}
+					},
+					{
+						"name": "Skip",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "Take",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "SortOnColumn",
+						"in": "query",
+						"schema": {
+							"$ref": "#/components/schemas/SortOnColumnDto"
+						}
+					},
+					{
+						"name": "SortByAction",
+						"in": "query",
+						"schema": {
+							"$ref": "#/components/schemas/SortByActionDto"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemRelatedToItemDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemRelatedToItemDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ItemRelatedToItemDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Search/{getsearchrequest}": {
+			"get": {
+				"tags": ["Search"],
+				"summary": "Get search by query",
+				"description": "Requires view privileges",
+				"operationId": "GetSearchByQuery",
+				"parameters": [
+					{
+						"name": "Index",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"nullable": true
+						}
+					},
+					{
+						"name": "Query",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"nullable": true
+						}
+					},
+					{
+						"name": "Page",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "PageSize",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					},
+					{
+						"name": "getsearchrequest",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SearchResultDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SearchResultDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SearchResultDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Search/{getitemsrequest}": {
+			"post": {
+				"tags": ["Search"],
+				"summary": "Add search",
+				"description": "Requires add privileges",
+				"operationId": "AddSearch",
+				"parameters": [
+					{
+						"name": "getitemsrequest",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json-patch+json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetItemsRequest"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetItemsRequest"
+							}
+						},
+						"text/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetItemsRequest"
+							}
+						},
+						"application/*+json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetItemsRequest"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/Search": {
+			"delete": {
+				"tags": ["Search"],
+				"summary": "Delete search",
+				"description": "Requires delete privileges",
+				"operationId": "DeleteSearch",
+				"responses": {
+					"200": {
+						"description": "Success"
+					}
+				}
+			}
+		},
+		"/api/Sites": {
+			"get": {
+				"tags": ["Sites"],
+				"summary": "Get sites",
+				"description": "Requires view privileges",
+				"operationId": "GetSites",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SiteDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SiteDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/SiteDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Sites/{guid}": {
+			"get": {
+				"tags": ["Sites"],
+				"summary": "Get sites by guid",
+				"description": "Requires view privileges",
+				"operationId": "GetSitesByGuid",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "guid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Sites"],
+				"summary": "Delete sites by guid",
+				"description": "Requires delete privileges",
+				"operationId": "DeleteSitesByGuid",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "guid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "boolean"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Sites/{id}": {
+			"get": {
+				"tags": ["Sites"],
+				"summary": "Get sites by id",
+				"description": "Requires view privileges",
+				"operationId": "GetSitesById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SiteDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/TemplateElements": {
+			"get": {
+				"tags": ["TemplateElements"],
+				"summary": "Get template elements",
+				"description": "Requires view privileges",
+				"operationId": "GetTemplateElements",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateElementDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateElementDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateElementDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Templates": {
+			"get": {
+				"tags": ["Templates"],
+				"summary": "Get templates",
+				"description": "Requires view privileges",
+				"operationId": "GetTemplates",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/TemplateDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Templates/{id}": {
+			"get": {
+				"tags": ["Templates"],
+				"summary": "Get templates by id",
+				"description": "Requires view privileges",
+				"operationId": "GetTemplatesById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"format": "int32"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/TemplateDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TemplateDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TemplateDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Themes": {
+			"get": {
+				"tags": ["Themes"],
+				"summary": "Get themes",
+				"description": "Requires view privileges",
+				"operationId": "GetThemes",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ThemeDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ThemeDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/ThemeDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/Themes/{guid}": {
+			"get": {
+				"tags": ["Themes"],
+				"summary": "Get themes by guid",
+				"description": "Requires view privileges",
+				"operationId": "GetThemesByGuid",
+				"parameters": [
+					{
+						"name": "uid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					},
+					{
+						"name": "guid",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/ThemeDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThemeDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ThemeDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/UserProfiles": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Get users",
+				"description": "Requires view privileges",
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/UserProfileDto"
+									}
+								}
+							},
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/UserProfileDto"
+									}
+								}
+							},
+							"text/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/UserProfileDto"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/api/UserProfiles/{request}": {
+			"get": {
+				"tags": ["Users"],
+				"summary": "Get users by query",
+				"description": "Requires view privileges",
+				"operationId": "GetUsersByQuery",
+				"parameters": [
+					{
+						"name": "FilterId",
+						"in": "query",
+						"schema": {
+							"type": "integer",
+							"format": "int32",
+							"nullable": true
+						}
+					},
+					{
+						"name": "FilterExternalId",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"nullable": true
+						}
+					},
+					{
+						"name": "FilterGuid",
+						"in": "query",
+						"schema": {
+							"type": "string",
+							"format": "uuid",
+							"nullable": true
+						}
+					},
+					{
+						"name": "FilterByCurrentAuthenticatedUser",
+						"in": "query",
+						"schema": {
+							"type": "boolean"
+						}
+					},
+					{
+						"name": "request",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"text/plain": {
+								"schema": {
+									"$ref": "#/components/schemas/UserProfileDto"
+								}
+							},
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserProfileDto"
+								}
+							},
+							"text/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserProfileDto"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"FileLocationDto": {
+				"enum": ["Local", "Azure"],
+				"type": "string"
+			},
+			"FileContainerDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"location": {
+						"type": "string",
+						"nullable": true
+					},
+					"fileLocation": {
+						"$ref": "#/components/schemas/FileLocationDto"
+					},
+					"allowedFileExtensions": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"FileTypeDto": {
+				"enum": ["Unknown", "Image", "Document", "Spreadsheet", "Presentation", "Video"],
+				"type": "string"
+			},
+			"FileDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"fileName": {
+						"type": "string",
+						"nullable": true
+					},
+					"externalName": {
+						"type": "string",
+						"nullable": true
+					},
+					"extension": {
+						"type": "string",
+						"nullable": true
+					},
+					"fileSize": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"fileType": {
+						"$ref": "#/components/schemas/FileTypeDto"
+					},
+					"fileContainer": {
+						"$ref": "#/components/schemas/FileContainerDto"
+					},
+					"contentType": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"ThemeDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"path": {
+						"type": "string",
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"LocalizationCultureDto": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"code": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"SiteRelatedLocalizationCultureDto": {
+				"type": "object",
+				"properties": {
+					"localizationCulture": {
+						"$ref": "#/components/schemas/LocalizationCultureDto"
+					},
+					"default": {
+						"type": "boolean"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"SiteDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"theme": {
+						"$ref": "#/components/schemas/ThemeDto"
+					},
+					"fileContainers": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/FileContainerDto"
+						},
+						"nullable": true
+					},
+					"relatedLocalizationCultures": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/SiteRelatedLocalizationCultureDto"
+						},
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"HostDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"siteId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"site": {
+						"$ref": "#/components/schemas/SiteDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"AddHostRequest": {
+				"type": "object",
+				"properties": {
+					"hostName": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"AddHostResponse": {
+				"type": "object",
+				"properties": {
+					"host": {
+						"$ref": "#/components/schemas/HostDto"
+					},
+					"savedSuccesfully": {
+						"type": "boolean"
+					}
+				}
+			},
+			"UpdateHostRequest": {
+				"type": "object",
+				"properties": {
+					"host": {
+						"$ref": "#/components/schemas/HostDto"
+					}
+				}
+			},
+			"UpdateHostResponse": {
+				"type": "object",
+				"properties": {
+					"host": {
+						"$ref": "#/components/schemas/HostDto"
+					},
+					"savedSuccesfully": {
+						"type": "boolean"
+					}
+				}
+			},
+			"AddInstallationResponse": {
+				"type": "object",
+				"properties": {
+					"addedSuccesfully": {
+						"type": "boolean"
+					}
+				}
+			},
+			"SortOnColumnDto": {
+				"enum": ["Published", "Created", "Updated"],
+				"type": "string"
+			},
+			"SortByActionDto": {
+				"enum": ["Ascending", "Descending"],
+				"type": "string"
+			},
+			"ItemTypeDto": {
+				"enum": [
+					"Undefined",
+					"RootPage",
+					"HomePage",
+					"CmsPage",
+					"SearchPage",
+					"Settingspage",
+					"Page",
+					"Container",
+					"ElementContainer",
+					"Element",
+					"CommentContainer",
+					"Comment",
+					"CommentElementContainer",
+					"CommentElement"
+				],
+				"type": "string"
+			},
+			"ItemValueTypeDto": {
+				"enum": ["Empty", "String", "DateTime", "Double"],
+				"type": "string"
+			},
+			"TemplateElementTypeDto": {
+				"enum": ["ContainerWithList", "ContainerWithSingularItem", "ContainerWithFieldset"],
+				"type": "string"
+			},
+			"TemplateElementDisplayTypeDto": {
+				"enum": ["Default", "Page", "List"],
+				"type": "string"
+			},
+			"TemplateElementDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"view": {
+						"type": "string",
+						"nullable": true
+					},
+					"recordsPerPage": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"sortAction": {
+						"$ref": "#/components/schemas/SortByActionDto"
+					},
+					"sortColumn": {
+						"$ref": "#/components/schemas/SortOnColumnDto"
+					},
+					"templateElementType": {
+						"$ref": "#/components/schemas/TemplateElementTypeDto"
+					},
+					"displayType": {
+						"$ref": "#/components/schemas/TemplateElementDisplayTypeDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"TemplateRelatedToTemplateElementDto": {
+				"type": "object",
+				"properties": {
+					"templateElement": {
+						"$ref": "#/components/schemas/TemplateElementDto"
+					},
+					"sortId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"TemplateModelElementTypeDto": {
+				"enum": ["Text", "HtmlContent", "Files", "File", "GoogleMapsCoordinate", "User", "Title", "Container"],
+				"type": "string"
+			},
+			"TemplateModelElementDto": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"modelElementType": {
+						"$ref": "#/components/schemas/TemplateModelElementTypeDto"
+					},
+					"displayType": {
+						"$ref": "#/components/schemas/TemplateElementDisplayTypeDto"
+					},
+					"options": {
+						"type": "string",
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"TemplateModelDto": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"description": {
+						"type": "string",
+						"nullable": true
+					},
+					"templateModelElements": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TemplateModelElementDto"
+						},
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"TemplateDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"relatedTemplateElements": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/TemplateRelatedToTemplateElementDto"
+						},
+						"nullable": true
+					},
+					"templateModel": {
+						"$ref": "#/components/schemas/TemplateModelDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"MenuItemDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"urlSegment": {
+						"type": "string",
+						"nullable": true
+					},
+					"relatedMenuItems": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/MenuItemDto"
+						},
+						"nullable": true
+					},
+					"relatedItem": {
+						"$ref": "#/components/schemas/ItemRelatedToItemDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"ItemRelatedToItemDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"item": {
+						"$ref": "#/components/schemas/ItemDto"
+					},
+					"menuItem": {
+						"$ref": "#/components/schemas/MenuItemDto"
+					},
+					"sortId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"childItemCount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"sortAction": {
+						"$ref": "#/components/schemas/SortByActionDto"
+					},
+					"sortColumn": {
+						"$ref": "#/components/schemas/SortOnColumnDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"ItemDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"itemType": {
+						"$ref": "#/components/schemas/ItemTypeDto"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"value": {
+						"type": "object",
+						"nullable": true
+					},
+					"valueType": {
+						"$ref": "#/components/schemas/ItemValueTypeDto"
+					},
+					"template": {
+						"$ref": "#/components/schemas/TemplateDto"
+					},
+					"templateElement": {
+						"$ref": "#/components/schemas/TemplateElementDto"
+					},
+					"templateModelElement": {
+						"$ref": "#/components/schemas/TemplateModelElementDto"
+					},
+					"relatedItems": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemRelatedToItemDto"
+						},
+						"nullable": true
+					},
+					"file": {
+						"$ref": "#/components/schemas/FileDto"
+					},
+					"options": {
+						"type": "string",
+						"nullable": true
+					},
+					"likeCount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"childItemCount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"createdById": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"updatedById": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"isBeingDeleted": {
+						"type": "boolean"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"AddItemsRequest": {
+				"type": "object",
+				"properties": {
+					"filterPageGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"filterContainerGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"templateModelId": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"menuGuid": {
+						"type": "string",
+						"format": "uuid",
+						"nullable": true
+					},
+					"parentMenuGuid": {
+						"type": "string",
+						"format": "uuid",
+						"nullable": true
+					}
+				}
+			},
+			"AddItemsResponse": {
+				"type": "object",
+				"properties": {
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemDto"
+						},
+						"nullable": true
+					},
+					"itemsAddedSuccessfully": {
+						"type": "boolean"
+					}
+				}
+			},
+			"UpdateItemsRequest": {
+				"type": "object",
+				"properties": {
+					"filterPageGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"filterContainerGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemDto"
+						},
+						"nullable": true
+					}
+				}
+			},
+			"UpdateItemsResponse": {
+				"type": "object",
+				"properties": {
+					"items": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemDto"
+						},
+						"nullable": true
+					},
+					"itemsUpdatedSuccessfully": {
+						"type": "boolean"
+					}
+				}
+			},
+			"DeleteItemRequest": {
+				"type": "object",
+				"properties": {
+					"filterPageGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"filterContainerGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"guidToDelete": {
+						"type": "string",
+						"format": "uuid"
+					}
+				}
+			},
+			"GetAuth0LoginRequest": {
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string",
+						"nullable": true
+					},
+					"password": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"LoginDto": {
+				"type": "object",
+				"properties": {
+					"access_token": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"MenuDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string",
+						"nullable": true
+					},
+					"description": {
+						"type": "string",
+						"nullable": true
+					},
+					"path": {
+						"type": "string",
+						"nullable": true
+					},
+					"menuItems": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/MenuItemDto"
+						},
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"PageDto": {
+				"type": "object",
+				"properties": {
+					"page": {
+						"$ref": "#/components/schemas/ItemDto"
+					},
+					"containers": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/ItemDto"
+						},
+						"nullable": true
+					}
+				}
+			},
+			"GetPingResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"nullable": true
+					}
+				}
+			},
+			"SearchResultDto": {
+				"type": "object",
+				"properties": {
+					"searchResults": {
+						"type": "object",
+						"nullable": true
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			},
+			"GetItemsRequest": {
+				"type": "object",
+				"properties": {
+					"filterPageGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"filterContainerGuid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"skip": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"take": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"sortOnColumn": {
+						"$ref": "#/components/schemas/SortOnColumnDto"
+					},
+					"sortByAction": {
+						"$ref": "#/components/schemas/SortByActionDto"
+					}
+				}
+			},
+			"UserSexDto": {
+				"enum": ["Neutral", "Male", "Female"],
+				"type": "string"
+			},
+			"UserProfileDto": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"sex": {
+						"$ref": "#/components/schemas/UserSexDto"
+					},
+					"firstName": {
+						"type": "string",
+						"nullable": true
+					},
+					"lastName": {
+						"type": "string",
+						"nullable": true
+					},
+					"occupation": {
+						"type": "string",
+						"nullable": true
+					},
+					"birthDay": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"avatar": {
+						"$ref": "#/components/schemas/FileDto"
+					},
+					"guid": {
+						"type": "string",
+						"format": "uuid"
+					},
+					"createdOn": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"updatedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			}
+		}
+	}
+}

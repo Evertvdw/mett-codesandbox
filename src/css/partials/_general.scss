@@ -1,0 +1,20 @@
+@import "../quasar.variables";
+
+.mett-avatar {
+	&.mett-no-avatar {
+		color: $contrast-font-color;
+		background-color: $disabled;
+	}
+
+	&.mett-border-1 {
+		.q-avatar__content {
+			border: 1px solid $contrast-font-color;
+		}
+	}
+
+	&.mett-border-2 {
+		.q-avatar__content {
+			border: 2px solid $contrast-font-color;
+		}
+	}
+}

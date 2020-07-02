@@ -1,18 +1,18 @@
-import Vue, { ComponentOptions } from 'vue'
-import VueI18n from 'vue-i18n'
-import messages from 'src/i18n'
+import Vue, { ComponentOptions } from "vue";
+import VueI18n from "vue-i18n";
+import messages from "src/i18n";
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-  locale: 'nl-nl',
-  fallbackLocale: 'nl-nl',
-  messages
-})
+	locale: "nl-nl",
+	fallbackLocale: "nl-nl",
+	messages
+});
 
 export default ({ app }: { app: ComponentOptions<Vue> }) => {
-  // Set i18n instance on app
-  app.i18n = i18n
-}
+	// Set i18n instance on app
+	app.i18n = i18n;
+};
 
-export { i18n }
+export { i18n };

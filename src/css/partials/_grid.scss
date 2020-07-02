@@ -1,0 +1,15 @@
+@import "../quasar.variables";
+
+.row {
+	&.mett-max-width {
+		max-width: $max-width;
+
+		@media (max-width: $max-width + $personal-drawer-mini-width + ($space-base * 2)) {
+			padding: 0 $space-base;
+		}
+	}
+
+	&.mett-centered {
+		margin: 0 auto;
+	}
+}

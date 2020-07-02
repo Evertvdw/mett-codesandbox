@@ -1,5 +1,5 @@
-import Static from './static'
+import Static from "./static"
 
 export default {
-  Static
+	Static
 }

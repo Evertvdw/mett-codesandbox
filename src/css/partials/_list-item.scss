@@ -1,0 +1,67 @@
+@import "../quasar.variables";
+
+.mett-list-item {
+	.mett-card-view & {
+		.mett-list-item-top-section {
+			height: $list-item-top-section-height;
+			background-color: $list-item-top-section-background-color;
+
+			&-actions {
+				padding: ($space-base / 2);
+			}
+		}
+
+		.mett-list-item-middle-section {
+			&-actions {
+				.q-btn {
+					margin-bottom: ($space-base / 2);
+					color: $contrast-font-color;
+				}
+			}
+		}
+
+		.mett-list-item-bottom-section {
+			padding: ($space-base / 2) 0;
+			margin-top: $space-base;
+			border-top: 1px solid lighten($separator-color, 50%);
+
+			&-actions {
+				padding: 0 $space-base;
+				text-align: right;
+
+				.q-btn {
+					color: $disabled;
+					margin-left: ($space-base / 4);
+
+					&:hover {
+						color: $primary;
+
+						.q-focus-helper {
+							background-color: transparent;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.mett-row-view & {
+		margin-bottom: $space-base;
+	}
+
+	.mett-title {
+		margin: $space-base 0;
+
+		@include fluid-type(
+			font-size line-height,
+			$breakpoint-xs,
+			$breakpoint-xl,
+			map-get($h4, "min-size"),
+			map-get($h4, "size")
+		);
+	}
+
+	.mett-date {
+		color: $disabled;
+	}
+}

@@ -1,134 +1,20 @@
-// app global css
-.mett-ml {
-  &-toolbar {
-    color: $contrast-font-color;
-    background-color: $secondary;
-  }
-
-  &-search-field {
-    max-width: $ml-search-field-width !important;
-  }
-
-  &-size-slider {
-    max-width: $ml-size-slider-width !important;
-    margin-right: auto;
-  }
-
-  &-sorting-field {
-    max-width: $ml-sorting-field-width !important;
-  }
-
-  &-layout {
-    height: calc(100vh - #{3 * $space-base + $toolbar-min-height});
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: $media-library-background-color;
-  }
-
-  &-header {
-    background: $media-library-background-color;
-  }
-
-  &-file-preview {
-    &-image {
-      max-width: 300px;
-      height: 200px;
-
-      &-crop {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-      }
-    }
-  }
-
-  &-file-tags {
-    &-input {
-      width: 100%;
-    }
-  }
-
-  &-file {
-    flex-grow: 1;
-    flex-shrink: 1;
-    position: relative;
-
-    &.selected {
-      transform: scale(0.98);
-
-      .mett-ml-file-image {
-        border-bottom: $space-base / 2 solid $primary;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-    }
-
-    &-caption {
-      width: 100%;
-      text-align: center;
-      display: block;
-      color: $contrast-font-color;
-      background: $img-content-background;
-      user-select: none;
-    }
-
-    &-image {
-      &-icon {
-        opacity: $img-content-icon-opacity;
-      }
-    }
-
-    &-checkbox {
-      color: $contrast-font-color;
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-    }
-  }
-
-  &-date-range-filter {
-    &-input {
-      display: block;
-      width: 100%;
-    }
-  }
-
-  &-number-range-filter {
-    &-input {
-      max-width: 100px;
-      padding-top: none;
-    }
-  }
-
-  &-select-filter {
-    &-input {
-      width: 100%;
-      padding-bottom: $space-base;
-    }
-  }
-
-  &-filter-title {
-    height: $ml-filter-title-size;
-  }
-
-  &-footer {
-    background-color: $media-library-background-color;
-  }
+@if $font-import-url != "" {
+	@import url($font-import-url);
 }
 
-.mett-filter-list {
-  .q-field__messages {
-    font-size: 10px !important;
-  }
-}
+@import "partials/functions";
+@import "partials/mixins";
 
-.uppy-Dashboard--modal {
-  z-index: 6001 !important;
-}
-
-.mett-video-player,
-.mett-audio-player {
-  &:focus {
-    outline: none;
-  }
-}
+@import "partials/comment";
+@import "partials/dialog";
+@import "partials/drawer";
+@import "partials/edit";
+@import "partials/field";
+@import "partials/flippable";
+@import "partials/general";
+@import "partials/grid";
+@import "partials/layout";
+@import "partials/list-item";
+@import "partials/media-library";
+@import "partials/typography";
+@import "partials/media-library";

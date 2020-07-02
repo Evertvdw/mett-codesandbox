@@ -1,0 +1,4 @@
+/dist
+/test/cypress
+/public
+/src-ssr

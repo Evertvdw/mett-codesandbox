@@ -1,3 +1,3 @@
-import Template from '../default'
+import Template from "../default"
 
 export default Template

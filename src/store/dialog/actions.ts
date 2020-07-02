@@ -1,50 +1,72 @@
-import { ActionTree } from 'vuex'
-import { IDialogState, IDialog, IDialogItem } from './types'
+import { ActionTree } from "vuex";
+import { IDialogState, IDialog, IDialogItem } from "./types";
+import { invalidArgument } from "src/mett/helpers/store-helper";
+import { ArgumentType } from "src/mett/helpers/types";
+import { i18n } from "src/boot/i18n";
+import { IError } from "../error/types";
 
 export const actions: ActionTree<IDialogState, object> = {
-  openDialog({ commit, dispatch }, { dialog }: { dialog: IDialog }) {
-    return new Promise((resolve, reject) => {
-      const dialogItem: IDialogItem = {
-        dialog,
-        resolve,
-        reject
-      }
+	openDialog({ commit, dispatch }, { dialog }: { dialog: IDialog }) {
+		if (invalidArgument(dispatch, "dialog/openDialog", [{ value: dialog, type: [ArgumentType.object] }])) {
+			const error: IError = {
+				timestamp: new Date(),
+				title: i18n.t("errors.unableToShowDialog.title"),
+				code: i18n.t("errors.unableToShowDialog.code"),
+				message: i18n.t("errors.unableToShowDialog.description", [dialog.title]),
+				notify: true
+			};
+			dispatch("error/addError", error, { root: true });
+			return Promise.reject();
+		}
 
-      commit('addDialogItem', dialogItem)
-    })
-  },
+		return new Promise((resolve, reject) => {
+			const dialogItem: IDialogItem = {
+				dialog,
+				resolve,
+				reject
+			};
 
-  resolveDialog(
-    { commit, getters, dispatch },
-    { dialog, value }: { dialog: IDialog; value?: any }
-  ) {
-    const targetContainer: IDialogItem | undefined = getters[
-      'dialogItemByDialog'
-    ](dialog)
+			commit("addDialogItem", dialogItem);
+		});
+	},
 
-    if (targetContainer) {
-      if (targetContainer.resolve) targetContainer.resolve(value)
+	resolveDialog({ commit, getters, dispatch }, { dialog, value }: { dialog: IDialog; value?: any }) {
+		if (
+			invalidArgument(dispatch, "dialog/resolveDialog", [
+				{ value: dialog, type: [ArgumentType.object] },
+				{ value: value, type: [ArgumentType.any, ArgumentType.undefined] }
+			])
+		)
+			return;
 
-      if (dialog.resolve) dialog.resolve()
+		const targetContainer: IDialogItem | undefined = getters["dialogItemByDialog"](dialog);
 
-      commit('removeDialogItem', targetContainer)
-    }
-  },
+		if (targetContainer) {
+			if (targetContainer.resolve) targetContainer.resolve(value);
 
-  rejectDialog(
-    { commit, getters, dispatch },
-    { dialog, reason }: { dialog: IDialog; reason?: any }
-  ) {
-    const targetContainer: IDialogItem | undefined = getters[
-      'dialogItemByDialog'
-    ](dialog)
+			if (dialog.resolve) dialog.resolve();
 
-    if (targetContainer) {
-      if (targetContainer.reject) targetContainer.reject(reason)
+			commit("removeDialogItem", targetContainer);
+		}
+	},
 
-      if (dialog.reject) dialog.reject()
+	rejectDialog({ commit, getters, dispatch }, { dialog, reason }: { dialog: IDialog; reason?: any }) {
+		if (
+			invalidArgument(dispatch, "dialog/rejectDialog", [
+				{ value: dialog, type: [ArgumentType.object] },
+				{ value: reason, type: [ArgumentType.any, ArgumentType.undefined] }
+			])
+		)
+			return;
 
-      commit('removeDialogItem', targetContainer)
-    }
-  }
-}
+		const targetContainer: IDialogItem | undefined = getters["dialogItemByDialog"](dialog);
+
+		if (targetContainer) {
+			if (targetContainer.reject) targetContainer.reject(reason);
+
+			if (dialog.reject) dialog.reject();
+
+			commit("removeDialogItem", targetContainer);
+		}
+	}
+};

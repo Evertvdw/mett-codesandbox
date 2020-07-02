@@ -1,0 +1,109 @@
+@import "../quasar.variables";
+
+::selection {
+	color: $contrast-font-color;
+	background-color: $primary;
+	text-shadow: none;
+}
+
+body {
+	color: $primary-font-color;
+	background-color: $page;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6 {
+	padding: 0;
+	margin: 0 0 $space-base 0;
+	font-family: $headings-font-family;
+}
+
+h1,
+.text-h1 {
+	margin: 0 0 ($space-base * 2) 0;
+
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h1, "min-size"),
+		map-get($h1, "size")
+	);
+}
+
+h2,
+.text-h2 {
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h2, "min-size"),
+		map-get($h2, "size")
+	);
+}
+
+h3,
+.text-h3 {
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h3, "min-size"),
+		map-get($h3, "size")
+	);
+}
+
+h4,
+.text-h4 {
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h4, "min-size"),
+		map-get($h4, "size")
+	);
+}
+
+h5,
+.text-h5 {
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h5, "min-size"),
+		map-get($h5, "size")
+	);
+}
+
+h6,
+.text-h6 {
+	@include fluid-type(
+		font-size line-height,
+		$breakpoint-xs,
+		$breakpoint-xl,
+		map-get($h6, "min-size"),
+		map-get($h6, "size")
+	);
+}
+
+p {
+	margin: 0 0 ($space-base * 2) 0;
+}
+
+.text-caption {
+	font-size: map-get($font-sizes, "small");
+}
+
+.text-disabled {
+	color: $disabled;
+}

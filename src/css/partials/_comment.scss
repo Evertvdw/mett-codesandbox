@@ -1,0 +1,34 @@
+@import "../quasar.variables";
+
+.mett-comment {
+	&-like {
+		color: $disabled;
+		cursor: pointer;
+
+		&:hover {
+			color: $positive;
+		}
+	}
+
+	&-liked {
+		color: $positive;
+		cursor: pointer;
+
+		&:hover {
+			color: $disabled;
+		}
+	}
+
+	&-content {
+		font-size: $comment-font-size;
+		color: $comment-color;
+	}
+
+	.mett-border-left-1 {
+		border-left: 1px solid $comment-border-color;
+	}
+
+	.mett-border-left-2 {
+		border-left: 2px solid $comment-border-color;
+	}
+}

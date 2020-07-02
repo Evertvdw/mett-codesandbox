@@ -1,5 +1,5 @@
-import nlNl from './nl-nl'
+import nlNl from "./nl-nl"
 
 export default {
-  'nl-nl': nlNl
+	"nl-nl": nlNl
 }

@@ -1,7 +1,7 @@
-import MediaLibrary from './media-library'
-import DialogList from './dialog-list'
+import MediaLibrary from "./media-library"
+import DialogList from "./dialog-list"
 
 export default {
-  MediaLibrary,
-  DialogList
+	MediaLibrary,
+	DialogList
 }

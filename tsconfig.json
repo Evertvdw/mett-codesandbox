@@ -1,8 +1,15 @@
 {
-  "extends": "@quasar/app/tsconfig-preset",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true
-  }
+	"extends": "@quasar/app/tsconfig-preset",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"paths": {
+			"src/*": ["src/*"],
+			"utils/*": ["test/jest/utils/*"]
+		},
+		"types": ["jest", "node", "quasar"]
+	},
+	"exclude": ["node_modules", "src-ssr", "dist", "logs"],
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "test/**/*.ts", "test/**/*.tsx"]
 }

@@ -1,0 +1,144 @@
+@import "../quasar.variables";
+
+.mett-header {
+	color: $header-color;
+	background: $header-background;
+
+	.mett-main-menu {
+		.q-tab {
+			&__label {
+				font-size: $tab-font-size;
+				font-weight: $tab-font-weight;
+				color: $tab-color;
+			}
+
+			&__content {
+				min-width: auto;
+			}
+
+			&__indicator {
+				height: $tab-indicator-height;
+				color: $tab-indicator-color;
+			}
+
+			&--active {
+				.q-tab__label {
+					color: $tab-active-color;
+				}
+			}
+		}
+	}
+}
+
+.mett-site-logo {
+	height: 30px;
+	width: auto;
+	vertical-align: middle;
+}
+
+.mett-shortcuts {
+	.mett-shortcut {
+		padding-right: ($space-base / 2);
+
+		&-search {
+			padding-right: 0;
+		}
+	}
+}
+
+.mett-page {
+	position: relative;
+	overflow-x: hidden;
+	justify-content: center;
+}
+
+.mett-breadcrumbs {
+	padding: $space-base 0;
+	background-color: $path-background;
+	text-transform: uppercase;
+
+	.q-breadcrumbs {
+		font-size: $path-font-size;
+		font-weight: $path-font-weight;
+
+		&__el {
+			color: $path-color;
+		}
+
+		&__separator {
+			margin-top: 6px;
+			color: $path-color;
+		}
+	}
+}
+
+.mett-item-description {
+	margin-bottom: ($space-base * 2);
+}
+
+.mett-view-switch {
+	margin-bottom: $space-base;
+	text-align: right;
+
+	.q-btn {
+		margin-left: ($space-base / 4);
+
+		&.mett-selected {
+			background-color: $selected;
+		}
+	}
+}
+
+.mett-item-list {
+	position: relative;
+}
+
+.mett-paging {
+	margin: ($space-base * 2) 0;
+	text-align: center;
+	justify-content: center;
+}
+
+.mett-footer {
+	color: $footer-color;
+	background-color: $footer-background-color;
+}
+
+.mett-content-actions {
+	z-index: 100;
+
+	.q-menu {
+		overflow: visible;
+	}
+}
+
+.mett-mobile-actions {
+	height: $mobile-actions-height;
+	padding: ($space-base / 2);
+	background-color: $primary;
+	border-top-left-radius: $mobile-actions-border-radius;
+	border-bottom-left-radius: $mobile-actions-border-radius;
+	border-bottom-width: 0;
+	transition: width 0.15s linear;
+
+	&-toggle-button {
+		padding: ($space-base / 2);
+		transition: transform 0.15s linear;
+	}
+
+	&-menu-button,
+	&-edit-button {
+		margin-left: ($space-base / 2);
+	}
+
+	.q-fab > .q-btn {
+		height: $mobile-actions-button-size;
+		width: $mobile-actions-button-size;
+
+		& > .q-btn__wrapper {
+			min-height: unset;
+			min-width: unset;
+			padding: 0;
+		}
+	}
+}

@@ -1,96 +1,190 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+	<q-layout :view="layoutView" @scroll="scrollHandler">
+		<q-header class="mett-header" reveal :height-hint="113">
+			<mett-header v-if="errorStatus != 500" />
+		</q-header>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+		<q-drawer
+			v-if="errorStatus != 500"
+			v-model="mobileMenuDrawerModel"
+			side="left"
+			overlay
+			class="lt-md mett-mobile-menu-drawer"
+			:class="{ 'mett-active': mobileMenuDrawer }"
+		>
+			<mett-mobile-menu-drawer />
+		</q-drawer>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+		<q-drawer
+			v-if="errorStatus != 500"
+			v-model="actionDrawerModel"
+			behavior="desktop"
+			side="right"
+			class="mett-action-drawer"
+			overlay
+			bordered
+			:class="{ 'mett-active': actionDrawer }"
+		>
+			<mett-action-drawer />
+		</q-drawer>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-        <q-item v-ripple clickable @click="onClick">
-          <q-item-section avatar>
-            <q-icon name="photo_library" />
-          </q-item-section>
+		<q-drawer
+			v-if="errorStatus != 500 && applicationUser"
+			v-model="personalDrawerModel"
+			:mini="miniState"
+			:width="250"
+			:mini-width="56"
+			:breakpoint="$q.screen.sizes.md"
+			show-if-above
+			mini-to-overlay
+			class="mett-personal-drawer"
+			:class="{ 'mett-active': personalDrawer }"
+			@mouseover="miniState = false"
+			@mouseout="miniState = true"
+		>
+			<mett-personal-drawer :mini-state="miniState" />
+		</q-drawer>
 
-          <q-item-section no-wrap>
-            Media Library
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+		<q-page-container class="mett-page">
+			<mett-carousel v-if="errorStatus != 500" />
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
+			<mett-breadcrumbs v-if="errorStatus != 500" />
 
-    <mett-dialog-list />
-  </q-layout>
+			<transition
+				v-if="errorStatus == 200"
+				appear
+				enter-active-class="animated fadeIn"
+				leave-active-class="animated fadeOut"
+				:duration="300"
+			>
+				<router-view :key="routerViewKey" />
+			</transition>
+
+			<transition
+				v-else-if="errorStatus == 404"
+				appear
+				enter-active-class="animated fadeIn"
+				leave-active-class="animated fadeOut"
+				:duration="300"
+			>
+				<mett-error-404-page />
+			</transition>
+
+			<transition
+				v-else-if="errorStatus == 401"
+				appear
+				enter-active-class="animated fadeIn"
+				leave-active-class="animated fadeOut"
+				:duration="300"
+			>
+				<mett-error-401-page />
+			</transition>
+
+			<transition
+				v-else
+				appear
+				enter-active-class="animated fadeIn"
+				leave-active-class="animated fadeOut"
+				:duration="300"
+			>
+				<mett-error-500-page />
+			</transition>
+		</q-page-container>
+
+		<q-footer v-if="errorStatus != 500" class="mett-footer">
+			<mett-footer />
+		</q-footer>
+
+		<mett-mobile-actions v-if="errorStatus != 500" />
+
+		<mett-dialog-list v-if="errorStatus != 500" />
+	</q-layout>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { Comp, Action } from 'src/mett/components/decorators'
-import { IDialog } from 'src/store/dialog/types'
-import { ItemDto } from 'src/mett/communication/types'
+import { mixins } from "vue-class-component";
+import { Vue, Component, Watch } from "vue-property-decorator";
+import { Comp, Getter, Action } from "src/mett/components/decorators";
+import { TemplateElementDisplayTypeDto, UserProfileDto } from "src/mett/communication/types";
+import DisplayTypeProvider from "src/mixins/display-type-provider";
 
 @Component
-export default class MainLayout extends Vue {
-  @Comp('Components.Static.DialogList') mettDialogList!: Vue
-  @Comp('Components.Static.MediaLibrary.MediaLibrary')
-  readonly mediaLibraryDialog!: Vue
+export default class Layout extends mixins(DisplayTypeProvider) {
+	@Comp("Pages.Error401Page") mettError401Page!: Vue;
+	@Comp("Pages.Error404Page") mettError404Page!: Vue;
+	@Comp("Pages.Error500Page") mettError500Page!: Vue;
 
-  @Action('dialog/openDialog') openDialog!: ({
-    dialog
-  }: {
-    dialog: IDialog
-  }) => Promise<any>
-  @Action('mediaLibrary/activate') activateMediaLibrary!: (options: {
-    item?: ItemDto
-  }) => void
-  @Action('mediaLibrary/setFileInfoShow') setFileInfoShow!: (
-    val: boolean
-  ) => void
+	@Comp("Components.Static.Actions.Mobile") mettMobileActions!: Vue;
+	@Comp("Components.Static.Breadcrumbs") mettBreadcrumbs!: Vue;
+	@Comp("Components.Static.Carousel") mettCarousel!: Vue;
+	@Comp("Components.Static.DialogList") mettDialogList!: Vue;
+	@Comp("Components.Static.Drawers.Action") mettActionDrawer!: Vue;
+	@Comp("Components.Static.Drawers.MobileMenu") mettMobileMenuDrawer!: Vue;
+	@Comp("Components.Static.Drawers.Personal") mettPersonalDrawer!: Vue;
+	@Comp("Components.Static.Footer") mettFooter!: Vue;
+	@Comp("Components.Static.Header") mettHeader!: Vue;
 
-  onClick() {
-    const dialog: IDialog = {
-      component: this.mediaLibraryDialog,
-      custom: true,
-      fullScreen: true
-    }
+	@Getter("error/status") errorStatus!: number;
+	@Getter("layout/actionDrawer") actionDrawer!: boolean;
+	@Getter("layout/layoutView") layoutView!: boolean;
+	@Getter("layout/mobileMenuDrawer") mobileMenuDrawer!: boolean;
+	@Getter("layout/personalDrawer") personalDrawer!: boolean;
+	@Getter("layout/mobileActionsCollapsed") mobileActionsCollapsed!: boolean;
+	@Getter("page/forceReloadIndex") forceReloadIndex!: number;
+	@Getter("user/applicationUser") applicationUser!: UserProfileDto;
 
-    this.openDialog({ dialog }).then(
-      () => {
-        this.setFileInfoShow(false)
-      },
-      () => {
-        this.setFileInfoShow(false)
-      }
-    )
-  }
+	@Action("layout/setActionDrawer") setActionDrawer!: (val: boolean) => void;
+	@Action("layout/setMobileMenuDrawer") setMobileMenuDrawer!: (val: boolean) => void;
+	@Action("layout/setPersonalDrawer") setPersonalDrawer!: (val: boolean) => void;
+	@Action("layout/setMobileActionsCollapsed") setMobileActionsCollapsed!: (val: boolean) => void;
 
-  leftDrawerOpen = false
+	get mobileMenuDrawerModel() {
+		return this.mobileMenuDrawer;
+	}
+
+	set mobileMenuDrawerModel(val: boolean) {
+		this.setMobileMenuDrawer(val);
+	}
+
+	get actionDrawerModel() {
+		return this.actionDrawer;
+	}
+
+	set actionDrawerModel(val: boolean) {
+		this.setActionDrawer(val);
+	}
+
+	get personalDrawerModel() {
+		return this.personalDrawer;
+	}
+
+	set personalDrawerModel(val: boolean) {
+		this.setPersonalDrawer(val);
+	}
+
+	scrollHandler(details: any) {
+		if (details.directionChanged || (details.direction == "down") !== this.mobileActionsCollapsed) {
+			if (details.position > 0) this.setMobileActionsCollapsed(details.direction == "down");
+		}
+	}
+
+	miniState = true;
+
+	@Watch("applicationUser")
+	onLoginChanged() {
+		this.miniState = true;
+	}
+
+	childDisplayType = TemplateElementDisplayTypeDto.Page;
+
+	get routerViewKey() {
+		let routerViewKey = this.$route.params.pageName;
+
+		if (this.$route.params.itemName) routerViewKey += "_" + this.$route.params.itemName;
+
+		routerViewKey += "_" + this.forceReloadIndex;
+
+		return routerViewKey;
+	}
 }
 </script>

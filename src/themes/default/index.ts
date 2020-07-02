@@ -1,8 +1,8 @@
-import Components from './components'
+import Components from "./components"
 
 export default {
-  themeName: 'Default Theme',
-  components: {
-    Components
-  }
+	themeName: "Default Theme",
+	components: {
+		Components
+	}
 }

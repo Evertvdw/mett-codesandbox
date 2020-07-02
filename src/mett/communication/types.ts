@@ -1,348 +1,348 @@
 export enum FileLocationDto {
-  Local = 'Local',
-  Azure = 'Azure'
+	Local = "Local",
+	Azure = "Azure"
 }
 
 export interface FileContainerDto {
-  id: number
-  location?: string
-  fileLocation?: FileLocationDto
-  allowedFileExtensions?: string
+	id: number;
+	location?: string;
+	fileLocation?: FileLocationDto;
+	allowedFileExtensions?: string;
 }
 
 export enum FileTypeDto {
-  Unknown = 'Unknown',
-  Image = 'Image',
-  Document = 'Document',
-  Spreadsheet = 'Spreadsheet',
-  Presentation = 'Presentation',
-  Video = 'Video'
+	Unknown = "Unknown",
+	Image = "Image",
+	Document = "Document",
+	Spreadsheet = "Spreadsheet",
+	Presentation = "Presentation",
+	Video = "Video"
 }
 
 export interface FileDto {
-  id: number
-  guid: string
-  fileName?: string
-  externalName?: string
-  extension?: string
-  fileSize: number
-  fileType?: FileTypeDto
-  fileContainer?: FileContainerDto
-  contentType?: string
+	id: number;
+	guid: string;
+	fileName?: string;
+	externalName?: string;
+	extension?: string;
+	fileSize: number;
+	fileType?: FileTypeDto;
+	fileContainer?: FileContainerDto;
+	contentType?: string;
 }
 
 export interface ThemeDto {
-  id: number
-  name?: string
-  path?: string
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	path?: string;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface LocalizationCultureDto {
-  name?: string
-  code?: string
+	name?: string;
+	code?: string;
 }
 
 export interface SiteRelatedLocalizationCultureDto {
-  localizationCulture?: LocalizationCultureDto
-  default: boolean
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	localizationCulture?: LocalizationCultureDto;
+	default: boolean;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface SiteDto {
-  id: number
-  name?: string
-  theme?: ThemeDto
-  fileContainers?: FileContainerDto[]
-  relatedLocalizationCultures?: SiteRelatedLocalizationCultureDto[]
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	theme?: ThemeDto;
+	fileContainers?: FileContainerDto[];
+	relatedLocalizationCultures?: SiteRelatedLocalizationCultureDto[];
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface HostDto {
-  id: number
-  siteId: number
-  name?: string
-  site?: SiteDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	siteId: number;
+	name?: string;
+	site?: SiteDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface AddHostRequest {
-  hostName?: string
+	hostName?: string;
 }
 
 export interface AddHostResponse {
-  host?: HostDto
-  savedSuccesfully: boolean
+	host?: HostDto;
+	savedSuccesfully: boolean;
 }
 
 export interface UpdateHostRequest {
-  host?: HostDto
+	host?: HostDto;
 }
 
 export interface UpdateHostResponse {
-  host?: HostDto
-  savedSuccesfully: boolean
+	host?: HostDto;
+	savedSuccesfully: boolean;
 }
 
 export interface AddInstallationResponse {
-  addedSuccesfully: boolean
+	added: boolean;
 }
 
 export enum SortOnColumnDto {
-  Published = 'Published',
-  Created = 'Created',
-  Updated = 'Updated'
+	Published = "Published",
+	Created = "Created",
+	Updated = "Updated"
 }
 
 export enum SortByActionDto {
-  Ascending = 'Ascending',
-  Descending = 'Descending'
+	Ascending = "Ascending",
+	Descending = "Descending"
 }
 
 export enum ItemTypeDto {
-  Undefined = 'Undefined',
-  RootPage = 'RootPage',
-  HomePage = 'HomePage',
-  CmsPage = 'CmsPage',
-  SearchPage = 'SearchPage',
-  Settingspage = 'Settingspage',
-  Page = 'Page',
-  Container = 'Container',
-  ElementContainer = 'ElementContainer',
-  Element = 'Element',
-  CommentContainer = 'CommentContainer',
-  Comment = 'Comment',
-  CommentElementContainer = 'CommentElementContainer',
-  CommentElement = 'CommentElement'
+	Undefined = "Undefined",
+	RootPage = "RootPage",
+	HomePage = "HomePage",
+	CmsPage = "CmsPage",
+	SearchPage = "SearchPage",
+	Settingspage = "Settingspage",
+	Page = "Page",
+	Container = "Container",
+	ElementContainer = "ElementContainer",
+	Element = "Element",
+	CommentContainer = "CommentContainer",
+	Comment = "Comment",
+	CommentElementContainer = "CommentElementContainer",
+	CommentElement = "CommentElement"
 }
 
 export enum ItemValueTypeDto {
-  Empty = 'Empty',
-  String = 'String',
-  DateTime = 'DateTime',
-  Double = 'Double'
+	Empty = "Empty",
+	String = "String",
+	DateTime = "DateTime",
+	Double = "Double"
 }
 
 export enum TemplateElementTypeDto {
-  ContainerWithList = 'ContainerWithList',
-  ContainerWithSingularItem = 'ContainerWithSingularItem',
-  ContainerWithFieldset = 'ContainerWithFieldset'
+	ContainerWithList = "ContainerWithList",
+	ContainerWithSingularItem = "ContainerWithSingularItem",
+	ContainerWithFieldset = "ContainerWithFieldset"
 }
 
 export enum TemplateElementDisplayTypeDto {
-  Default = 'Default',
-  Page = 'Page',
-  List = 'List'
+	Default = "Default",
+	Page = "Page",
+	List = "List"
 }
 
 export interface TemplateElementDto {
-  id: number
-  name?: string
-  view?: string
-  recordsPerPage: number
-  sortAction?: SortByActionDto
-  sortColumn?: SortOnColumnDto
-  templateElementType?: TemplateElementTypeDto
-  displayType?: TemplateElementDisplayTypeDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	view?: string;
+	recordsPerPage: number;
+	sortAction?: SortByActionDto;
+	sortColumn?: SortOnColumnDto;
+	templateElementType?: TemplateElementTypeDto;
+	displayType?: TemplateElementDisplayTypeDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface TemplateRelatedToTemplateElementDto {
-  templateElement?: TemplateElementDto
-  sortId: number
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	templateElement?: TemplateElementDto;
+	sortId: number;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export enum TemplateModelElementTypeDto {
-  Text = 'Text',
-  HtmlContent = 'HtmlContent',
-  Files = 'Files',
-  File = 'File',
-  GoogleMapsCoordinate = 'GoogleMapsCoordinate',
-  User = 'User',
-  Title = 'Title',
-  Container = 'Container'
+	Text = "Text",
+	HtmlContent = "HtmlContent",
+	Files = "Files",
+	File = "File",
+	GoogleMapsCoordinate = "GoogleMapsCoordinate",
+	User = "User",
+	Title = "Title",
+	Container = "Container"
 }
 
 export interface TemplateModelElementDto {
-  name?: string
-  modelElementType?: TemplateModelElementTypeDto
-  displayType?: TemplateElementDisplayTypeDto
-  options?: string
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	name?: string;
+	modelElementType?: TemplateModelElementTypeDto;
+	displayType?: TemplateElementDisplayTypeDto;
+	options?: string;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface TemplateModelDto {
-  name?: string
-  description?: string
-  templateModelElements?: TemplateModelElementDto[]
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	name?: string;
+	description?: string;
+	templateModelElements?: TemplateModelElementDto[];
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface TemplateDto {
-  id: number
-  name?: string
-  relatedTemplateElements?: TemplateRelatedToTemplateElementDto[]
-  templateModel?: TemplateModelDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	relatedTemplateElements?: TemplateRelatedToTemplateElementDto[];
+	templateModel?: TemplateModelDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface MenuItemDto {
-  id: number
-  name?: string
-  urlSegment?: string
-  relatedMenuItems?: MenuItemDto[]
-  relatedItem?: ItemRelatedToItemDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	urlSegment?: string;
+	relatedMenuItems?: MenuItemDto[];
+	relatedItem?: ItemRelatedToItemDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface ItemRelatedToItemDto {
-  id: number
-  item?: ItemDto
-  menuItem?: MenuItemDto
-  sortId: number
-  childItemCount: number
-  sortAction?: SortByActionDto
-  sortColumn?: SortOnColumnDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	item?: ItemDto;
+	menuItem?: MenuItemDto;
+	sortId: number;
+	childItemCount: number;
+	sortAction?: SortByActionDto;
+	sortColumn?: SortOnColumnDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface ItemDto {
-  id: number
-  itemType?: ItemTypeDto
-  name?: string
-  value?: any
-  valueType?: ItemValueTypeDto
-  template?: TemplateDto
-  templateElement?: TemplateElementDto
-  templateModelElement?: TemplateModelElementDto
-  relatedItems?: ItemRelatedToItemDto[]
-  file?: FileDto
-  options?: string
-  likeCount: number
-  childItemCount: number
-  createdById: number
-  updatedById: number
-  isBeingDeleted: boolean
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	itemType?: ItemTypeDto;
+	name?: string;
+	value?: any;
+	valueType?: ItemValueTypeDto;
+	template?: TemplateDto;
+	templateElement?: TemplateElementDto;
+	templateModelElement?: TemplateModelElementDto;
+	relatedItems?: ItemRelatedToItemDto[];
+	file?: FileDto;
+	options?: string;
+	likeCount: number;
+	childItemCount: number;
+	createdById: number;
+	updatedById: number;
+	isBeingDeleted: boolean;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface AddItemsRequest {
-  filterPageGuid: string
-  filterContainerGuid: string
-  templateModelId: number
-  menuGuid?: string
-  parentMenuGuid?: string
+	filterPageGuid: string;
+	filterContainerGuid: string;
+	templateModelId: number;
+	menuGuid?: string;
+	parentMenuGuid?: string;
 }
 
 export interface AddItemsResponse {
-  items?: ItemDto[]
-  itemsAddedSuccessfully: boolean
+	items?: ItemDto[];
+	itemsAddedSuccessfully: boolean;
 }
 
 export interface UpdateItemsRequest {
-  filterPageGuid: string
-  filterContainerGuid: string
-  items?: ItemDto[]
+	filterPageGuid: string;
+	filterContainerGuid: string;
+	items?: ItemDto[];
 }
 
 export interface UpdateItemsResponse {
-  items?: ItemDto[]
-  itemsUpdatedSuccessfully: boolean
+	items?: ItemDto[];
+	itemsUpdatedSuccessfully: boolean;
 }
 
 export interface DeleteItemRequest {
-  filterPageGuid: string
-  filterContainerGuid: string
-  guidToDelete: string
+	filterPageGuid: string;
+	filterContainerGuid: string;
+	guidToDelete: string;
 }
 
 export interface GetAuth0LoginRequest {
-  username?: string
-  password?: string
+	username?: string;
+	password?: string;
 }
 
 export interface LoginDto {
-  access_token?: string
+	access_token?: string;
 }
 
 export interface MenuDto {
-  id: number
-  name?: string
-  description?: string
-  path?: string
-  menuItems?: MenuItemDto[]
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	name?: string;
+	description?: string;
+	path?: string;
+	menuItems?: MenuItemDto[];
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface PageDto {
-  page?: ItemDto
-  containers?: ItemDto[]
+	page?: ItemDto;
+	containers?: ItemDto[];
 }
 
 export interface GetPingResponse {
-  message?: string
+	message?: string;
 }
 
 export interface SearchResultDto {
-  searchResults?: any
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	searchResults?: any;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 export interface GetItemsRequest {
-  filterPageGuid: string
-  filterContainerGuid: string
-  skip: number
-  take: number
-  sortOnColumn?: SortOnColumnDto
-  sortByAction?: SortByActionDto
+	filterPageGuid: string;
+	filterContainerGuid: string;
+	skip: number;
+	take: number;
+	sortOnColumn?: SortOnColumnDto;
+	sortByAction?: SortByActionDto;
 }
 
 export enum UserSexDto {
-  Neutral = 'Neutral',
-  Male = 'Male',
-  Female = 'Female'
+	Neutral = "Neutral",
+	Male = "Male",
+	Female = "Female"
 }
 
 export interface UserProfileDto {
-  id: number
-  sex?: UserSexDto
-  firstName?: string
-  lastName?: string
-  occupation?: string
-  birthDay: Date
-  avatar?: FileDto
-  guid: string
-  createdOn: Date
-  updatedOn: Date
+	id: number;
+	sex?: UserSexDto;
+	firstName?: string;
+	lastName?: string;
+	occupation?: string;
+	birthDay: Date;
+	avatar?: FileDto;
+	guid: string;
+	createdOn: Date;
+	updatedOn: Date;
 }
 
 /**
@@ -351,7 +351,7 @@ export interface UserProfileDto {
  * Route: /api/AntiForgery
  * Method: GET
  */
-export type ApiGetAntiForgeryResponse = any
+export type ApiGetAntiForgeryResponse = any;
 
 /**
  * Get downloads
@@ -359,7 +359,7 @@ export type ApiGetAntiForgeryResponse = any
  * Route: /api/Downloads
  * Method: GET
  */
-export type ApiGetDownloadsResponse = any
+export type ApiGetDownloadsResponse = any;
 
 /**
  * Get downloads
@@ -368,8 +368,8 @@ export type ApiGetDownloadsResponse = any
  * Method: GET
  */
 export interface ApiGetDownloadsRequest {
-  fileGuid?: string
-  contentDisposition?: string
+	fileGuid?: string;
+	contentDisposition?: string;
 }
 
 /**
@@ -378,7 +378,7 @@ export interface ApiGetDownloadsRequest {
  * Route: /api/FileContainers
  * Method: GET
  */
-export type ApiGetFileContainersResponse = FileContainerDto[]
+export type ApiGetFileContainersResponse = FileContainerDto[];
 
 /**
  * Get the files
@@ -386,7 +386,7 @@ export type ApiGetFileContainersResponse = FileContainerDto[]
  * Route: /api/Files
  * Method: GET
  */
-export type ApiGetFilesResponse = FileDto[]
+export type ApiGetFilesResponse = FileDto[];
 
 /**
  * Get a file by guid
@@ -394,7 +394,7 @@ export type ApiGetFilesResponse = FileDto[]
  * Route: /api/Files/{uid}
  * Method: GET
  */
-export type ApiGetFileByGuidResponse = FileDto
+export type ApiGetFileByGuidResponse = FileDto;
 
 /**
  * Get a file by guid
@@ -410,7 +410,7 @@ export interface ApiGetFileByGuidRequest {}
  * Route: /api/Files/{uid}
  * Method: DELETE
  */
-export type ApiDeleteFileByGuidResponse = boolean
+export type ApiDeleteFileByGuidResponse = boolean;
 
 /**
  * Delete a file by guid
@@ -426,7 +426,7 @@ export interface ApiDeleteFileByGuidRequest {}
  * Route: /api/Hosts
  * Method: GET
  */
-export type ApiGetHostResponse = HostDto
+export type ApiGetHostResponse = HostDto;
 
 /**
  * Add new host
@@ -434,7 +434,7 @@ export type ApiGetHostResponse = HostDto
  * Route: /api/Hosts
  * Method: POST
  */
-export type ApiAddHostResponse = AddHostResponse
+export type ApiAddHostResponse = AddHostResponse;
 
 /**
  * Add new host
@@ -442,7 +442,7 @@ export type ApiAddHostResponse = AddHostResponse
  * Route: /api/Hosts
  * Method: POST
  */
-export type ApiAddHostRequest = AddHostRequest
+export type ApiAddHostRequest = AddHostRequest;
 
 /**
  * Get host by name
@@ -450,7 +450,7 @@ export type ApiAddHostRequest = AddHostRequest
  * Route: /api/Hosts/{name}
  * Method: GET
  */
-export type ApiGetHostByNameResponse = HostDto
+export type ApiGetHostByNameResponse = HostDto;
 
 /**
  * Get host by name
@@ -466,7 +466,7 @@ export interface ApiGetHostByNameRequest {}
  * Route: /api/Hosts/{id}
  * Method: PUT
  */
-export type ApiUpdateHostByIdResponse = UpdateHostResponse
+export type ApiUpdateHostByIdResponse = UpdateHostResponse;
 
 /**
  * Update existing host by id
@@ -474,7 +474,7 @@ export type ApiUpdateHostByIdResponse = UpdateHostResponse
  * Route: /api/Hosts/{id}
  * Method: PUT
  */
-export type ApiUpdateHostByIdRequest = UpdateHostRequest
+export type ApiUpdateHostByIdRequest = UpdateHostRequest;
 
 /**
  * Install a new site
@@ -482,7 +482,7 @@ export type ApiUpdateHostByIdRequest = UpdateHostRequest
  * Route: /api/Installation
  * Method: GET
  */
-export type ApiAddInstallationResponse = AddInstallationResponse
+export type ApiAddInstallationResponse = AddInstallationResponse;
 
 /**
  * Get items
@@ -490,7 +490,7 @@ export type ApiAddInstallationResponse = AddInstallationResponse
  * Route: /api/Items
  * Method: GET
  */
-export type ApiGetItemsResponse = ItemDto[]
+export type ApiGetItemsResponse = ItemDto[];
 
 /**
  * Get items
@@ -498,7 +498,7 @@ export type ApiGetItemsResponse = ItemDto[]
  * Route: /api/Items
  * Method: GET
  */
-export type ApiGetItemsRequest = GetItemsRequest
+export type ApiGetItemsRequest = GetItemsRequest;
 
 /**
  * Add items
@@ -506,7 +506,7 @@ export type ApiGetItemsRequest = GetItemsRequest
  * Route: /api/Items
  * Method: POST
  */
-export type ApiAddItemsResponse = AddItemsResponse
+export type ApiAddItemsResponse = AddItemsResponse;
 
 /**
  * Add items
@@ -514,7 +514,7 @@ export type ApiAddItemsResponse = AddItemsResponse
  * Route: /api/Items
  * Method: POST
  */
-export type ApiAddItemsRequest = AddItemsRequest
+export type ApiAddItemsRequest = AddItemsRequest;
 
 /**
  * Update items
@@ -522,7 +522,7 @@ export type ApiAddItemsRequest = AddItemsRequest
  * Route: /api/Items
  * Method: PUT
  */
-export type ApiUpdateItemsResponse = UpdateItemsResponse
+export type ApiUpdateItemsResponse = UpdateItemsResponse;
 
 /**
  * Update items
@@ -530,7 +530,7 @@ export type ApiUpdateItemsResponse = UpdateItemsResponse
  * Route: /api/Items
  * Method: PUT
  */
-export type ApiUpdateItemsRequest = UpdateItemsRequest
+export type ApiUpdateItemsRequest = UpdateItemsRequest;
 
 /**
  * Delete items
@@ -538,7 +538,7 @@ export type ApiUpdateItemsRequest = UpdateItemsRequest
  * Route: /api/Items
  * Method: DELETE
  */
-export type ApiDeleteItemsResponse = boolean
+export type ApiDeleteItemsResponse = boolean;
 
 /**
  * Delete items
@@ -546,7 +546,7 @@ export type ApiDeleteItemsResponse = boolean
  * Route: /api/Items
  * Method: DELETE
  */
-export type ApiDeleteItemsRequest = DeleteItemRequest
+export type ApiDeleteItemsRequest = DeleteItemRequest;
 
 /**
  * Login
@@ -554,7 +554,7 @@ export type ApiDeleteItemsRequest = DeleteItemRequest
  * Route: /api/Login/{getLoginRequest}
  * Method: POST
  */
-export type ApiPostLoginResponse = LoginDto
+export type ApiPostLoginResponse = LoginDto;
 
 /**
  * Login
@@ -562,7 +562,7 @@ export type ApiPostLoginResponse = LoginDto
  * Route: /api/Login/{getLoginRequest}
  * Method: POST
  */
-export type ApiPostLoginRequest = GetAuth0LoginRequest
+export type ApiPostLoginRequest = GetAuth0LoginRequest;
 
 /**
  * Logout
@@ -570,7 +570,7 @@ export type ApiPostLoginRequest = GetAuth0LoginRequest
  * Route: /api/Logout
  * Method: GET
  */
-export type ApiLogoutResponse = boolean
+export type ApiLogoutResponse = boolean;
 
 /**
  * Get menu for url segment
@@ -578,7 +578,7 @@ export type ApiLogoutResponse = boolean
  * Route: /api/MenuItems/{getMenuItemRequest}
  * Method: GET
  */
-export type ApiGetMenuItemsResponse = MenuItemDto
+export type ApiGetMenuItemsResponse = MenuItemDto;
 
 /**
  * Get menu for url segment
@@ -587,9 +587,9 @@ export type ApiGetMenuItemsResponse = MenuItemDto
  * Method: GET
  */
 export interface ApiGetMenuItemsRequest {
-  FilterUrlSegment?: string
-  FilterMenuId?: number
-  IncludeRelatedMenuItems?: boolean
+	FilterUrlSegment?: string;
+	FilterMenuId?: number;
+	IncludeRelatedMenuItems?: boolean;
 }
 
 /**
@@ -598,7 +598,7 @@ export interface ApiGetMenuItemsRequest {
  * Route: /api/Menus
  * Method: GET
  */
-export type ApiGetMenusResponse = MenuDto
+export type ApiGetMenusResponse = MenuDto;
 
 /**
  * Get pages
@@ -606,7 +606,7 @@ export type ApiGetMenusResponse = MenuDto
  * Route: /api/Pages
  * Method: GET
  */
-export type ApiGetPagesResponse = MenuItemDto[]
+export type ApiGetPagesResponse = MenuItemDto[];
 
 /**
  * Get page by query
@@ -614,7 +614,7 @@ export type ApiGetPagesResponse = MenuItemDto[]
  * Route: /api/Pages/{getPageRequest}
  * Method: GET
  */
-export type ApiGetPagesByQueryResponse = PageDto
+export type ApiGetPagesByQueryResponse = PageDto;
 
 /**
  * Get page by query
@@ -623,9 +623,9 @@ export type ApiGetPagesByQueryResponse = PageDto
  * Method: GET
  */
 export interface ApiGetPagesByQueryRequest {
-  FilterPageGuid?: string
-  FilterContainerGuid?: string
-  LoadComments?: boolean
+	FilterPageGuid?: string;
+	FilterContainerGuid?: string;
+	LoadComments?: boolean;
 }
 
 /**
@@ -634,7 +634,7 @@ export interface ApiGetPagesByQueryRequest {
  * Route: /api/Ping
  * Method: GET
  */
-export type ApiGetPingResponse = GetPingResponse
+export type ApiGetPingResponse = GetPingResponse;
 
 /**
  * Get items related to an item
@@ -642,7 +642,7 @@ export type ApiGetPingResponse = GetPingResponse
  * Route: /api/RelatedItems
  * Method: GET
  */
-export type ApiGetRelatedItemsResponse = ItemRelatedToItemDto[]
+export type ApiGetRelatedItemsResponse = ItemRelatedToItemDto[];
 
 /**
  * Get items related to an item
@@ -651,13 +651,13 @@ export type ApiGetRelatedItemsResponse = ItemRelatedToItemDto[]
  * Method: GET
  */
 export interface ApiGetRelatedItemsRequest {
-  FilterPageGuid?: string
-  FilterContainerGuid?: string
-  FilterItemGuid?: string
-  Skip?: number
-  Take?: number
-  SortOnColumn?: SortOnColumnDto
-  SortByAction?: SortByActionDto
+	FilterPageGuid?: string;
+	FilterContainerGuid?: string;
+	FilterItemGuid?: string;
+	Skip?: number;
+	Take?: number;
+	SortOnColumn?: SortOnColumnDto;
+	SortByAction?: SortByActionDto;
 }
 
 /**
@@ -666,7 +666,7 @@ export interface ApiGetRelatedItemsRequest {
  * Route: /api/Search/{getsearchrequest}
  * Method: GET
  */
-export type ApiGetSearchByQueryResponse = SearchResultDto[]
+export type ApiGetSearchByQueryResponse = SearchResultDto[];
 
 /**
  * Get search by query
@@ -675,10 +675,10 @@ export type ApiGetSearchByQueryResponse = SearchResultDto[]
  * Method: GET
  */
 export interface ApiGetSearchByQueryRequest {
-  Index?: string
-  Query?: string
-  Page?: number
-  PageSize?: number
+	Index?: string;
+	Query?: string;
+	Page?: number;
+	PageSize?: number;
 }
 
 /**
@@ -687,7 +687,7 @@ export interface ApiGetSearchByQueryRequest {
  * Route: /api/Search/{getitemsrequest}
  * Method: POST
  */
-export type ApiAddSearchResponse = any
+export type ApiAddSearchResponse = any;
 
 /**
  * Add search
@@ -695,7 +695,7 @@ export type ApiAddSearchResponse = any
  * Route: /api/Search/{getitemsrequest}
  * Method: POST
  */
-export type ApiAddSearchRequest = GetItemsRequest
+export type ApiAddSearchRequest = GetItemsRequest;
 
 /**
  * Delete search
@@ -703,7 +703,7 @@ export type ApiAddSearchRequest = GetItemsRequest
  * Route: /api/Search
  * Method: DELETE
  */
-export type ApiDeleteSearchResponse = any
+export type ApiDeleteSearchResponse = any;
 
 /**
  * Get sites
@@ -711,7 +711,7 @@ export type ApiDeleteSearchResponse = any
  * Route: /api/Sites
  * Method: GET
  */
-export type ApiGetSitesResponse = SiteDto[]
+export type ApiGetSitesResponse = SiteDto[];
 
 /**
  * Get sites by guid
@@ -719,7 +719,7 @@ export type ApiGetSitesResponse = SiteDto[]
  * Route: /api/Sites/{guid}
  * Method: GET
  */
-export type ApiGetSitesByGuidResponse = SiteDto
+export type ApiGetSitesByGuidResponse = SiteDto;
 
 /**
  * Get sites by guid
@@ -728,7 +728,7 @@ export type ApiGetSitesByGuidResponse = SiteDto
  * Method: GET
  */
 export interface ApiGetSitesByGuidRequest {
-  uid?: string
+	uid?: string;
 }
 
 /**
@@ -737,7 +737,7 @@ export interface ApiGetSitesByGuidRequest {
  * Route: /api/Sites/{guid}
  * Method: DELETE
  */
-export type ApiDeleteSitesByGuidResponse = boolean
+export type ApiDeleteSitesByGuidResponse = boolean;
 
 /**
  * Delete sites by guid
@@ -746,7 +746,7 @@ export type ApiDeleteSitesByGuidResponse = boolean
  * Method: DELETE
  */
 export interface ApiDeleteSitesByGuidRequest {
-  uid?: string
+	uid?: string;
 }
 
 /**
@@ -755,7 +755,7 @@ export interface ApiDeleteSitesByGuidRequest {
  * Route: /api/Sites/{id}
  * Method: GET
  */
-export type ApiGetSitesByIdResponse = SiteDto
+export type ApiGetSitesByIdResponse = SiteDto;
 
 /**
  * Get sites by id
@@ -771,7 +771,7 @@ export interface ApiGetSitesByIdRequest {}
  * Route: /api/TemplateElements
  * Method: GET
  */
-export type ApiGetTemplateElementsResponse = TemplateElementDto[]
+export type ApiGetTemplateElementsResponse = TemplateElementDto[];
 
 /**
  * Get templates
@@ -779,7 +779,7 @@ export type ApiGetTemplateElementsResponse = TemplateElementDto[]
  * Route: /api/Templates
  * Method: GET
  */
-export type ApiGetTemplatesResponse = TemplateDto[]
+export type ApiGetTemplatesResponse = TemplateDto[];
 
 /**
  * Get templates by id
@@ -787,7 +787,7 @@ export type ApiGetTemplatesResponse = TemplateDto[]
  * Route: /api/Templates/{id}
  * Method: GET
  */
-export type ApiGetTemplatesByIdResponse = TemplateDto
+export type ApiGetTemplatesByIdResponse = TemplateDto;
 
 /**
  * Get templates by id
@@ -803,7 +803,7 @@ export interface ApiGetTemplatesByIdRequest {}
  * Route: /api/Themes
  * Method: GET
  */
-export type ApiGetThemesResponse = ThemeDto[]
+export type ApiGetThemesResponse = ThemeDto[];
 
 /**
  * Get themes by guid
@@ -811,7 +811,7 @@ export type ApiGetThemesResponse = ThemeDto[]
  * Route: /api/Themes/{guid}
  * Method: GET
  */
-export type ApiGetThemesByGuidResponse = ThemeDto
+export type ApiGetThemesByGuidResponse = ThemeDto;
 
 /**
  * Get themes by guid
@@ -820,7 +820,7 @@ export type ApiGetThemesByGuidResponse = ThemeDto
  * Method: GET
  */
 export interface ApiGetThemesByGuidRequest {
-  uid?: string
+	uid?: string;
 }
 
 /**
@@ -829,7 +829,7 @@ export interface ApiGetThemesByGuidRequest {
  * Route: /api/UserProfiles
  * Method: GET
  */
-export type ApiGetUsersResponse = UserProfileDto[]
+export type ApiGetUsersResponse = UserProfileDto[];
 
 /**
  * Get users by query
@@ -837,7 +837,7 @@ export type ApiGetUsersResponse = UserProfileDto[]
  * Route: /api/UserProfiles/{request}
  * Method: GET
  */
-export type ApiGetUsersByQueryResponse = UserProfileDto
+export type ApiGetUsersByQueryResponse = UserProfileDto;
 
 /**
  * Get users by query
@@ -846,8 +846,8 @@ export type ApiGetUsersByQueryResponse = UserProfileDto
  * Method: GET
  */
 export interface ApiGetUsersByQueryRequest {
-  FilterId?: number
-  FilterExternalId?: string
-  FilterGuid?: string
-  FilterByCurrentAuthenticatedUser?: boolean
+	FilterId?: number;
+	FilterExternalId?: string;
+	FilterGuid?: string;
+	FilterByCurrentAuthenticatedUser?: boolean;
 }

@@ -1,0 +1,36 @@
+@import "../quasar.variables";
+
+.q-field {
+	&--float:not(.q-field--outlined) {
+		.q-field__label {
+			transform: translateY(-60%) scale(1);
+		}
+
+		.q-field__bottom {
+			text-align: right;
+
+			.q-field__messages {
+				right: 0;
+				font-size: $input-font-size - 2;
+			}
+		}
+
+		.q-placeholder {
+			padding-bottom: 0;
+		}
+	}
+
+	&--error {
+		.q-field__label {
+			color: $negative;
+		}
+	}
+
+	&.q-textarea {
+		.q-field__native {
+			min-height: 150px;
+			padding-top: $space-base / 2;
+			line-height: $input-font-size + 8;
+		}
+	}
+}

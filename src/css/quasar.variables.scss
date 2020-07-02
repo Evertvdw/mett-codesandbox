@@ -1,17 +1,3 @@
-// Quasar Sass (& SCSS) Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass/SCSS variables found in Quasar's source Sass/SCSS files.
-
-// Check documentation for full list of Quasar variables
-
-// Your own variables (that are declared here) and Quasar's own
-// ones will be available out of the box in your .vue/.scss/.sass files
-
-// It's highly recommended to change the default colors
-// to match your app's branding.
-// Tip: Use the "Theme Builder" on Quasar's documentation website.
-
 // Theme colors
 $primary: #0073d1 !default;
 $secondary: #333f52 !default;
@@ -27,54 +13,58 @@ $primary-font-color: #333f52 !default;
 $secondary-font-color: #666 !default;
 $contrast-font-color: #fff !default;
 
+// Dark mode
+$dark: #1d1d1d !default;
+$dark-page: #121212 !default;
+
 // Typography
-$font-import-url: 'https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap' !default;
-$typography-font-family: 'Lato', sans-serif !default;
-$headings-font-family: 'Lato', sans-serif !default;
+$font-import-url: "https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" !default;
+$typography-font-family: "Lato", sans-serif !default;
+$headings-font-family: "Lato", sans-serif !default;
 $font-sizes: (
-  smaller: 12px,
-  small: 14px,
-  normal: 16px,
-  large: 18px,
-  larger: 20px
+	smaller: 12px,
+	small: 14px,
+	normal: 16px,
+	large: 18px,
+	larger: 20px
 ) !default;
 $font-weights: (
-  light: 300,
-  regular: 400,
-  medium: 500,
-  bold: 700
+	light: 300,
+	regular: 400,
+	medium: 500,
+	bold: 700
 ) !default;
 $h1: (
-  size: 42px,
-  min-size: 36px,
-  weight: 700
+	size: 42px,
+	min-size: 36px,
+	weight: 700
 ) !default;
 $h2: (
-  size: 36px,
-  min-size: 30px,
-  weight: 700
+	size: 36px,
+	min-size: 30px,
+	weight: 700
 ) !default;
 $h3: (
-  size: 30px,
-  min-size: 24px,
-  weight: 700
+	size: 30px,
+	min-size: 24px,
+	weight: 700
 ) !default;
 $h4: (
-  size: 24px,
-  min-size: 21px,
-  weight: 700
+	size: 24px,
+	min-size: 21px,
+	weight: 700
 ) !default;
 $h5: (
-  size: 21px,
-  min-size: 18px,
-  weight: 700
+	size: 21px,
+	min-size: 18px,
+	weight: 700
 ) !default;
 $h6: (
-  size: 18px,
-  min-size: 16px,
-  weight: 700
+	size: 18px,
+	min-size: 16px,
+	weight: 700
 ) !default;
-$body-font-size: map-get($font-sizes, 'normal');
+$body-font-size: map-get($font-sizes, "normal");
 $text-weights: $font-weights;
 
 // General
@@ -84,6 +74,114 @@ $generic-border-radius: 4px !default;
 $generic-hover-transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1) !default;
 $separator-color: rgba(0, 0, 0, 0.12) !default;
 $separator-dark-color: rgba(255, 255, 255, 0.28) !default;
+
+// Grid
+$max-width: 1200px !default;
+$breakpoint-xs: 599px !default;
+$breakpoint-sm: 1023px !default;
+$breakpoint-md: 1439px !default;
+$breakpoint-lg: 1919px !default;
+$breakpoint-xl: 2559px !default;
+
+// Header
+$header-color: $primary-font-color !default;
+$header-background: $page !default;
+$toolbar-min-height: 50px !default;
+$toolbar-padding: 0 $space-base !default;
+$toolbar-inset-size: 58px !default;
+$toolbar-title-padding: 0 $space-base !default;
+$toolbar-title-font-size: 21px !default;
+$toolbar-title-font-weight: map-get($font-weights, "regular") !default;
+$toolbar-title-letter-spacing: 0.01em !default;
+
+// Path
+$path-background: #f6f6f6 !default;
+$path-color: #666 !default;
+$path-font-size: map-get($font-sizes, "small") !default;
+$path-font-weight: map-get($font-weights, "light") !default;
+
+// Drawer
+$personal-drawer-mini-width: 56px !default;
+$personal-drawer-color: $contrast-font-color !default;
+$personal-drawer-background: $primary !default;
+
+// Footer
+$footer-color: $contrast-font-color !default;
+$footer-background-color: $secondary !default;
+$footer-font-size: map-get($font-sizes, "small") !default;
+$footer-item-color: darken($contrast-font-color, 20%) !default;
+$footer-item-hover-color: $contrast-font-color !default;
+
+// Button
+$button-padding: ($space-base / 4) $space-base !default;
+$button-font-size: map-get($font-sizes, "small") !default;
+$button-font-weight: map-get($font-weights, "bold") !default;
+$button-line-height: 1.715em !default;
+$button-border-radius: $generic-border-radius !default;
+$button-transition: $generic-hover-transition !default;
+$button-rounded-border-radius: ($space-base * 2) !default;
+$button-push-border-radius: ($space-base / 2) !default;
+
+// Input
+$input-font-size: map-get($font-sizes, "normal") !default;
+$input-text-color: $primary-font-color !default;
+$input-label-color: $secondary-font-color !default;
+
+// Menu (drop-down)
+$menu-max-width: 95vw !default;
+$menu-background: $page !default;
+
+// Tab (main menu)
+$tab-font-size: map-get($font-sizes, "normal") !default;
+$tab-font-weight: map-get($font-weights, "regular") !default;
+$tab-color: $primary-font-color !default;
+$tab-active-color: $primary !default;
+$tab-indicator-height: 3px !default;
+$tab-indicator-color: $primary !default;
+
+// Table
+$table-border-color: $separator-color !default;
+$table-border-radius: $generic-border-radius !default;
+$table-hover-background: rgba(0, 0, 0, 0.03) !default;
+$table-selected-background: rgba(0, 0, 0, 0.06) !default;
+$table-dark-border-color: $separator-dark-color !default;
+$table-dark-hover-background: rgba(255, 255, 255, 0.07) !default;
+
+// Tooltip
+$tooltip-padding: 6px 10px !default;
+$tooltip-fontsize: map-get($font-sizes, "extrasmall") !default;
+$tooltip-color: #fafafa !default;
+$tooltip-background: #757575 !default;
+$tooltip-border-radius: $generic-border-radius !default;
+$tooltip-mobile-padding: ($space-base / 2) $space-base !default;
+$tooltip-mobile-fontsize: map-get($font-sizes, "small") !default;
+
+// Chat
+$chat-message-avatar-size: $avatar-size !default;
+$chat-message-distance: ($space-base / 2) !default;
+$chat-message-text-padding: ($space-base / 2) !default;
+$chat-message-received-color: #000 !default;
+$chat-message-received-bg: #81c784 !default;
+$chat-message-sent-color: #000 !default;
+$chat-message-sent-bg: #e0e0e0 !default;
+$chat-message-border-radius: $generic-border-radius !default;
+
+// Rating
+$rating-grade-color: $primary !default;
+
+// Mobile actions
+$mobile-actions-height: 58px;
+$mobile-actions-border-radius: 42px;
+$mobile-actions-button-size: 42px;
+
+// Comment
+$comment-color: #555 !default;
+$comment-font-size: map-get($font-sizes, "small") !default;
+$comment-border-color: #e0e0e0 !default;
+
+// List item
+$list-item-top-section-height: 200px !default;
+$list-item-top-section-background-color: $tertiary !default;
 
 // Dialog
 $dialog-fullscreen-height: 95vh !default;
@@ -100,3 +198,6 @@ $img-content-color: #fff !default;
 $img-content-background: rgba(0, 0, 0, 0.5) !default;
 $img-loading-font-size: 50px !default;
 $img-content-icon-opacity: 0.8 !default;
+
+// Content
+$edit-indicator-width: 6px !default;

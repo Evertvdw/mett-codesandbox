@@ -1,0 +1,42 @@
+@import "../quasar.variables";
+
+.q-dialog {
+	.q-card {
+		width: 100%;
+		overflow-x: hidden;
+
+		&__actions {
+			padding-top: $space-base;
+		}
+
+		.text-h2 {
+			margin: 0;
+		}
+	}
+
+	.q-scrollarea {
+		min-height: 50vh;
+
+		pre {
+			&.border-left-negative-2 {
+				border-left: 2px solid $negative;
+			}
+
+			&.border-left-warning-2 {
+				border-left: 2px solid $warning;
+			}
+		}
+	}
+
+	.q-button-close {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
+	.q-btn:not(.q-btn--round):not(.q-btn--outline) {
+		.q-btn__wrapper {
+			padding: $button-padding;
+		}
+	}
+}

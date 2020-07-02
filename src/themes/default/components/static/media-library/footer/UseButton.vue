@@ -15,6 +15,6 @@ import { Getter } from "src/mett/components/decorators";
 
 @Component
 export default class MettMediaLibraryUseButton extends Vue {
-	@Getter("mediaLibrary/fileSelect") fileSelect!: object[];
+	@Getter("mediaLibrary/fileSelect") fileSelect!: unknown[];
 }
 </script>

@@ -1,5 +1,5 @@
-import ImageEditDialog from './ImageEditDialog.vue'
+import ImageEditDialog from "./ImageEditDialog.vue"
 
 export default {
-  ImageEditDialog
+	ImageEditDialog
 }

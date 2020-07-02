@@ -1,0 +1,43 @@
+{
+	"vetur.experimental.templateInterpolationService": true,
+	"vetur.validation.template": false,
+	"eslint.validate": ["javascript", "javascriptreact", "typescript", "vue", "html"],
+	"path-intellisense.mappings": {
+		"src": "${workspaceRoot}/src"
+	},
+	"vetur.format.options.tabSize": 4,
+	"vetur.format.options.useTabs": true,
+	"vetur.format.defaultFormatter.js": "prettier",
+	"vetur.format.defaultFormatter.css": "prettier",
+	"vetur.format.defaultFormatter.html": "prettyhtml",
+	"vetur.format.defaultFormatter.scss": "prettier",
+	"vetur.format.defaultFormatter.ts": "prettier",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"html.format.indentInnerHtml": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"editor.detectIndentation": false,
+	"editor.formatOnSave": true,
+	"prettier.printWidth": 120,
+	"stylelint.enable": true,
+	"css.validate": false,
+	"less.validate": false,
+	"scss.validate": true,
+	"todo-tree.filtering.excludeGlobs": ["**/node_modules/**", "**/dist/**", "**/build/**", "**/.vscode/**"],
+	"todo-tree.regex.regex": "(//|#|<!--|/\\*|^\\s*\\*)\\s*($TAGS)",
+	"todo-tree.general.tags": ["todo", "TODO", "Fix", "FIX", "fix", "Todo"],
+	"editor.wordWrap": "on",
+	"editor.wordWrapColumn": 120,
+	"search.exclude": {
+		"/src/statics": true,
+		"package-lock.json": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll": true
+	},
+	"appService.zipIgnorePattern": [".vscode{,/**}"],
+	"appService.deploySubpath": "/dist/ssr/",
+	"appService.preDeployTask": "",
+	"appService.defaultWebAppToDeploy": "/subscriptions/032bbe39-2200-4743-944b-9e437474bd38/resourceGroups/Linux/providers/Microsoft.Web/sites/mett4dev",
+	"appService.showBuildDuringDeployPrompt": false
+}
