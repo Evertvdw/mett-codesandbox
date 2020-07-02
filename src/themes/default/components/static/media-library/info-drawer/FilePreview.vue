@@ -35,7 +35,8 @@
 			<q-video :src="filePreview.url"></q-video>
 		</q-item>
 		<q-item v-if="isImage">
-			<q-btn icon="edit" :disable="!filePreview.url" flat dense @click="onClick"></q-btn>
+			<q-btn icon="edit" :disable="!filePreview.url" flat dense @click="openEdit"></q-btn>
+			<q-btn icon="fullscreen" :disable="!filePreview.url" flat dense @click="openFullScreen"></q-btn>
 		</q-item>
 		<q-separator></q-separator>
 	</q-list>
@@ -54,6 +55,8 @@ import { Watch } from "vue-property-decorator";
 export default class MettMediaLibraryFilePreview extends Vue {
 	@Comp("Components.Static.DialogList.Dialogs.ImageEditDialog")
 	readonly mettImageEditDialog!: Vue;
+	@Comp("Components.Static.DialogList.Dialogs.ImageFullDialog")
+	readonly mettImageFullDialog!: Vue;
 
 	@Getter("mediaLibrary/filePreview") filePreview!: CustomFileDto | null;
 
@@ -61,7 +64,7 @@ export default class MettMediaLibraryFilePreview extends Vue {
 
 	@Ref("videoPlayer") videoPlayer!: HTMLVideoElement;
 
-	onClick() {
+	openEdit() {
 		const dialog: IDialog = {
 			title: this.$t("dialogs.imageEdit.title"),
 			titleClass: "text-h6",
@@ -71,6 +74,18 @@ export default class MettMediaLibraryFilePreview extends Vue {
 			customMaxWidth: "80vw"
 		};
 
+		this.openDialog({ dialog }).then(
+			() => {},
+			() => {}
+		);
+	}
+
+	openFullScreen() {
+		const dialog: IDialog = {
+			fullScreen: true,
+			component: this.mettImageFullDialog,
+			custom: true
+		};
 		this.openDialog({ dialog }).then(
 			() => {},
 			() => {}

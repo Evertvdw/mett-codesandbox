@@ -8,7 +8,8 @@
 			"src/*": ["src/*"],
 			"utils/*": ["test/jest/utils/*"]
 		},
-		"types": ["jest", "node", "quasar"]
+		"types": ["quasar", "jest", "node"],
+		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},
 	"exclude": ["node_modules", "src-ssr", "dist", "logs"],
 	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "test/**/*.ts", "test/**/*.tsx"]

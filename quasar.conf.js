@@ -1,5 +1,8 @@
 // Configuration for your app
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // https://quasar.dev/quasar-cli/quasar-conf-js
+const fs = require("fs");
 
 module.exports = function(ctx) {
 	return {
@@ -9,7 +12,15 @@ module.exports = function(ctx) {
 		// app boot file (/src/boot)
 		// --> boot files are part of "main.js"
 		// https://quasar.dev/quasar-cli/boot-files
-		boot: ["i18n", "theme-park", "load-optimizer", "vue-setup"],
+		boot: [
+			"logger",
+			"redirect",
+			"i18n",
+			"theme-park",
+			"load-optimizer",
+			"vue-setup",
+			{ path: "editor", server: false }
+		],
 
 		supportTS: true,
 
@@ -35,7 +46,7 @@ module.exports = function(ctx) {
 			vueRouterMode: "history", // available values: 'hash', 'history'
 
 			// transpile: false,
-			scopeHoisting: true
+			scopeHoisting: true,
 
 			// Add dependencies for transpiling with Babel (Array of string/regex)
 			// (from node_modules, which are by default not transpiled).
@@ -53,12 +64,18 @@ module.exports = function(ctx) {
 
 			// https://quasar.dev/quasar-cli/handling-webpack
 			// extendWebpack (cfg) {},
+			afterBuild() {
+				if (ctx.prod && ctx.modeName == "ssr") {
+					fs.copyFileSync("ecosystem.config.js", "dist/ssr/ecosystem.config.js");
+				}
+			}
 		},
 
 		// Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
 		devServer: {
-			open: false, // leave this here for Codesandbox to work
-			public: "http://0.0.0.0" // leave this here for Codesandbox to work
+			open: true, // leave this here for Codesandbox to work
+			port: 8000
+			// public: "http://0.0.0.0" // leave this here for Codesandbox to work
 		},
 
 		// https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
@@ -78,7 +95,7 @@ module.exports = function(ctx) {
 
 		// animations: 'all', // --- includes all animations
 		// https://quasar.dev/options/animations
-		animations: [],
+		animations: ["fadeInRight", "fadeOutRight", "fadeIn", "fadeOut", "zoomOut"],
 
 		// https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
 		ssr: {

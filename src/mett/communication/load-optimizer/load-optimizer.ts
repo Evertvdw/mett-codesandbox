@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable prefer-rest-params */
 
 import Vue from "vue";

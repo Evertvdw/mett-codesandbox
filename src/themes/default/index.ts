@@ -1,8 +1,10 @@
-import Components from "./components"
+import Components from "./components";
+import Pages from "./pages";
 
 export default {
-	themeName: "Default Theme",
+	themeName: "Default Mett Theme",
 	components: {
-		Components
+		Components,
+		Pages
 	}
-}
+};

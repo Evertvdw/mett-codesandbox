@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import Vue from "vue";
 
 export interface ICallOptions {

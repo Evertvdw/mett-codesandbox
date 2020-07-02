@@ -14,11 +14,33 @@ let _ssrContext: QSsrContext | undefined;
 
 function loadTheme(app: MyComponentOptions, store: Store<object>) {
 	return new Promise((resolve, reject) => {
-		app.$themePark.loadTheme("default").then(
+		const theme: ThemeDto = store.getters["host/theme"];
+
+		if (!theme || !theme.name) {
+			if (_ssrContext)
+				log({
+					short_message: "[_ID_] | \u2716 No theme name available",
+					full_message: safeStringify(store.getters["host/host"]),
+					level: 4
+				});
+			if (app.i18n) {
+				store.dispatch("error/addError", {
+					code: app.i18n.t("errors.unableToLoadTheme.code"),
+					title: app.i18n.t("errors.unableToLoadTheme.title"),
+					message: app.i18n.t("errors.unableToLoadTheme.description", [undefined]),
+					info: theme
+				});
+			}
+			return reject({
+				error: "No theme or theme name available",
+				info: theme
+			});
+		}
+		app.$themePark.loadTheme(theme.name).then(
 			() => {
 				if (_ssrContext) {
 					log({
-						short_message: `[_ID_] | \u2714 ${"default"} theme loaded`,
+						short_message: `[_ID_] | \u2714 ${theme.name} theme loaded`,
 						full_message: "",
 						level: 7
 					});
@@ -28,7 +50,7 @@ function loadTheme(app: MyComponentOptions, store: Store<object>) {
 			(reason: any) => {
 				if (_ssrContext) {
 					log({
-						short_message: `[_ID_] | \u2716 ${"default"} theme failed to load`,
+						short_message: `[_ID_] | \u2716 ${theme.name} theme failed to load`,
 						full_message: "",
 						level: 3
 					});
@@ -36,7 +58,7 @@ function loadTheme(app: MyComponentOptions, store: Store<object>) {
 				store.dispatch("error/addError", {
 					code: app.i18n.t("errors.unableToLoadTheme.code"),
 					title: app.i18n.t("errors.unableToLoadTheme.title"),
-					message: app.i18n.t("errors.unableToLoadTheme.description", ["default"]),
+					message: app.i18n.t("errors.unableToLoadTheme.description", [theme.name]),
 					info: reason
 				});
 				reject(reason);
@@ -331,17 +353,17 @@ export default ({
 		app.$loadOptimizer.setBaseUrl(settings.api.url);
 
 		try {
-			// await loadHostInfo(app, store);
+			await loadHostInfo(app, store);
 			await loadTheme(app, store);
-			// const promises = Promise.all([
-			// 	loadMenu(app, store),
-			// 	loadPageMenuItems(app, store),
-			// 	loadTemplates(app, store)
-			// ]);
-			// if (app.$loadOptimizer.accessTokenSet()) loadApplicationUser(app, store).catch(() => {});
-			// initLocalStorageHandling(app, store);
-			// initQueryChangeWatch(app, store, router);
-			// await promises;
+			const promises = Promise.all([
+				loadMenu(app, store),
+				loadPageMenuItems(app, store),
+				loadTemplates(app, store)
+			]);
+			if (app.$loadOptimizer.accessTokenSet()) loadApplicationUser(app, store).catch(() => {});
+			initLocalStorageHandling(app, store);
+			initQueryChangeWatch(app, store, router);
+			await promises;
 			if (_ssrContext) {
 				const end = now();
 				log(

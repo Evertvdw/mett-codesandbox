@@ -1,0 +1,55 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+
+stages:
+- stage: build_and_test_and_deploy
+  displayName: "Build, Test & Deploy"
+  pool: 
+      vmImage: "ubuntu-latest"
+  jobs:
+  - job: build_and_test_and_deploy
+    displayName: "Build, Test & Deploy develop"
+    steps:
+      - template: devops/build.yml
+      - template: devops/unit.testing.yml
+      - template: devops/prepare-deploy.yml
+      - template: devops/dev.deploy.yml
+
+- stage: e2e_testing_stage
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  displayName: 'Run E2E tests'
+  pool: 
+      vmImage: "ubuntu-latest"
+  jobs:
+  - job: e2e_testing_job
+    displayName: 'Run E2E tests in multiple browsers'
+    steps:
+      - template: devops/e2e.testing.yml
+        parameters:
+          browserType: ["chrome"]
+
+# - stage: deploy_master
+#   dependsOn:
+#       - build_and_test_and_deploy
+#   displayName: "Deploy to master"
+#   pool: 
+#       vmImage: "ubuntu-latest"
+#   jobs:
+#   - job: deploy_master
+#     displayName: "Deploy to master"
+#     steps:
+#       - template: devops/master.deploy.yml
+#     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+
+
+

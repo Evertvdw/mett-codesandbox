@@ -16,7 +16,7 @@ export function createQueryStringFromObject(feed: any) {
 	return queryString;
 }
 
-export function safeStringify(obj: unknown, indent = 2) {
+export function safeStringify(obj: object, indent = 2) {
 	const cache: any[] = [];
 	const retVal = JSON.stringify(
 		obj,

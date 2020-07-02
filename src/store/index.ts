@@ -1,13 +1,20 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import { mediaLibrary } from "./media-library/media-library";
+import { actionDrawer } from "./action-drawer/action-drawer";
 import { dialog } from "./dialog/dialog";
 import { error } from "./error/error";
-import { settings } from "./settings/settings";
 import { host } from "./host/host";
+import { layout } from "./layout/layout";
 import { loadOptimizer } from "./load-optimizer/load-optimizer";
-
+import { mediaLibrary } from "./media-library/media-library";
+import { menu } from "./menu/menu";
+import { page } from "./page/page";
+import { search } from "./search/search";
+import { settings } from "./settings/settings";
+import { task } from "./task/task";
+import { template } from "./template/template";
+import { user } from "./user/user";
 import { ILoadOptimizer } from "src/mett/communication/load-optimizer/types";
 
 Vue.use(Vuex);
@@ -29,7 +36,6 @@ declare module "vuex/types" {
 }
 
 export default function(/* { ssrContext } */) {
-	// eslint-disable-next-line @typescript-eslint/ban-types
 	const Store = new Vuex.Store<object>({
 		state: {},
 		mutations: {
@@ -38,12 +44,20 @@ export default function(/* { ssrContext } */) {
 			}
 		},
 		modules: {
-			mediaLibrary: mediaLibrary(),
+			actionDrawer: actionDrawer(),
 			dialog: dialog(),
 			error: error(),
+			host: host(),
 			loadOptimizer: loadOptimizer(),
+			mediaLibrary: mediaLibrary(),
+			menu: menu(),
+			page: page(),
+			search: search(),
 			settings: settings(),
-			host: host()
+			template: template(),
+			task: task(),
+			user: user(),
+			layout: layout()
 		},
 
 		// enable strict mode (adds overhead!)
